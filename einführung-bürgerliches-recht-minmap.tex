@@ -2,29 +2,10 @@
 
 \usepackage{amsmath, amssymb, amsthm}
 \usepackage{tikz}
-\usetikzlibrary{arrows,decorations.markings}
-\usetikzlibrary{calc}
-\usetikzlibrary{intersections}
-\usetikzlibrary{positioning}
-\usetikzlibrary{patterns}
-\usetikzlibrary{circuits.logic.US,circuits.logic.IEC,fit}
-\newcommand\addvmargin[1]{
-  \node[fit=(current bounding box),inner ysep=#1,inner xsep=0]{};
-}
 \newcommand\yt{http://www.youtube.com/embed/IwLSrNu1ppI?autoplay=1&controls=0&loop=1&start=01}
-\usepackage{pgfplots}
-\usepgflibrary{patterns}
 \usepackage[T1]{fontenc}
-\usepackage{mathptmx}
-\usepackage{multirow}
-\usepackage{textcomp}
-\usepackage{multicol}
 \usepackage{coffee}
-\usepackage{makecell}
-\usepackage[makeroom]{cancel}
-\usepackage{lscape}
 \usepackage[utf8]{inputenc}
-\usepackage{geometry}
  \geometry{
 	 paperwidth=147cm,
 	 paperheight=147cm,
@@ -34,23 +15,6 @@
 	 bottom=20mm,
 	 }
 \usepackage{hyperref}
-\newcommand{\thicc}{thick}
-\newcommand{\ultraskip}{\bigskip\bigskip\bigskip\bigskip\bigskip\bigskip}
-\newcommand{\tabellenskalierung}{0.75}
-\newcommand{\PreserveBackslash}[1]{\let\temp=\\#1\let\\=\temp}
-\newcolumntype{C}[1]{>{\PreserveBackslash\centering}p{#1}}
-\newcolumntype{R}[1]{>{\PreserveBackslash\raggedleft}p{#1}}
-\newcolumntype{L}[1]{>{\PreserveBackslash\raggedright}p{#1}}
-
-\newcommand*{\info}[4][16.3]{%
-	\node [ annotation, #3, scale=0.65, text width = #1em, inner sep = 2mm ] at (#2) {%
-	\list{$\bullet$}{\topsep=0pt\itemsep=0pt\parsep=0pt
-	\parskip=0pt\labelwidth=8pt\leftmargin=8pt
-	\itemindent=0pt\labelsep=2pt}%
-	#4
-	\endlist
-	};
-}
 
 \usepackage{CrimsonPro}
 \usetikzlibrary{mindmap,trees}
