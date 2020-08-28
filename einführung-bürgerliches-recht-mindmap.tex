@@ -6,6 +6,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{coffee}
 \usepackage[utf8]{inputenc}
+\usepackage{geometry}
  \geometry{
 	 paperwidth=147cm,
 	 paperheight=147cm,
@@ -15,7 +16,6 @@
 	 bottom=20mm,
 	 }
 \usepackage{hyperref}
-
 \usepackage{CrimsonPro}
 \usetikzlibrary{mindmap,trees}
 \begin{document}
@@ -35,7 +35,7 @@
 			level 3/.style={level distance=7cm, sibling angle=43, font=\large}, 
 			level 4/.style={level distance=6cm, sibling angle=40,  font=\normalsize}
 		]
-	\draw (10,20) node[text width=70mm] {\href{\yt}{\Huge \textbf{Staat}}}
+	\draw (10,20) node[text width=70mm] {\href{https://www.youtube.com/watch?v=P1CyPjQQTAM}{\Huge \textbf{Staat}}}
 [clockwise from =100]
 child { node (gg) {Grundgesetz}
 [clockwise from=170]
@@ -76,14 +76,14 @@ child { node {Bundesorgane}
 	}
 
 	;
-\draw (45,32) node[text width=65mm] {\Huge{\textbf{Privat\-autonomie} \Large Recht private Rechtsverträge nach eigener Entscheidung zu gestalten Art. 2 GG}}
+	\draw (45,32) node[text width=65mm] {\Huge{\href{http://www.youtube.com/embed/a3f7n08yYUU?autoplay=1&controls=0&loop=1&start=30}{\textbf{Privat\-autonomie}}\\ \Large Recht private Rechtsverträge nach eigener Entscheidung zu gestalten Art. 2 GG}}
 	[clockwise from=120]
 	child { node {Vertragsfreiheit}
 	[clockwise from=150]
 		child { node {Abschlussfreiheit}}
 		child { node {Inhaltsfreiheit}}
 		child { node {grundsätzliche Formfreiheit}}
-		child { node {\textbf{Ausnahme} Kontrahierungszwang}}
+		child { node {\textbf{Ausnahme} \\ Kontrahierungs\-zwang}}
 		}
 	child { node {Testierfreiheit}}
 	child { node {Eigentumsfreiheit}}
@@ -97,16 +97,19 @@ child { node {Bundesorgane}
 			}
 			}
  ;
-\draw (-30,25) node[text width=70mm] {\Huge \textbf{Gesetz\-gebung}}
-child { node {\textbf{Verwaltungsakt:} hoheitliche Maßnahme einer Behörde die Konkrete Einzelfälle regelt und Rechtsfolgen herbeiführen kann}}
+\draw (-30,25) node[text width=70mm] {\Huge \textbf{Gesetzgebung} \\\Large\href{https://www.youtube.com/watch?v=j30H6pcg7lE}{[Video]}}
+child { node[text width=50mm] {\textbf{Verwaltungsakt:} hoheitliche Maßnahme einer Behörde die konkrete Einzelfälle auf dem Gebiet des öffentlichen Rechts regelt und auf eine Rechtsfolgen gerichtet ist.}}
 child { node {\textbf{Gesetzgeber}}
 	child {node {Gemeinden}}
 	child {node {Länder}}
 	child {node {Bund}} }
-child { node {\textbf{ausschließlich}}}
-child { node {\textbf{konkurrierend:} Recht Gesetze zu geben, wenn der andere von Seiner Befugnis keinen Gebrauch macht}};
+child { node {Gesetzgebungs\-kompetenz}
+	child { node {\textbf{ausschließlich}}}
+	child[sibling angle=50] { node[text width=50mm] {\textbf{konkurrierend:} Recht Gesetze zu geben, wenn der andere von Seiner Befugnis keinen Gebrauch macht \\ z.B. Dürfen die Länder bestimmte bereche regeln solange der Bund kein Gesetz erlässt.}}
+	}
+	;
 
-\draw (50,-5) node[text width=70mm] {\href{\yt}{\Huge \textbf{Recht}}}
+\draw (50,-5) node[text width=70mm] {\href{https://www.youtube.com/watch?v=hpjV962DLWs&t=19}{\Huge \textbf{Recht}}}
 [clockwise from = 152]
 child { node {\textbf{Subjektive:} Ansprüche des Einzelnen, die aus den Rechtsnormen hervorgehen}
 [clockwise from = 140]
@@ -127,9 +130,9 @@ child[yshift=2cm] { node {\textbf{Funktionen:}}
 child { node {\textbf{Zwingend:} Darf vertraglich nicht abgeändert werden \\ \textbf{Nachgiebig:} steht zur Disposition }} 
 child[yshift=2cm,xshift=2cm] { node {\textbf{Vorrang:} bei der Anwendbarkeit von mehreren Rechtsnormen auf einen Sachverhalt}
 [clockwise from = 70]
-	child { node {lex-specialis}}
-	child { node {lex-posterior}}
-	child { node {lex-superior}
+	child { node {\href{https://de.wikipedia.org/wiki/Kollisionsregel\#Allgemeine_Kollisionsregeln}{lex-specialis}}}
+	child { node {\href{https://de.wikipedia.org/wiki/Kollisionsregel\#Allgemeine_Kollisionsregeln}{lex-specialis}}}
+	child { node {\href{https://de.wikipedia.org/wiki/Kollisionsregel\#Allgemeine_Kollisionsregeln}{lex-specialis}}
 	[clockwise from=30, text width=50mm]
 		child { node {\begin{enumerate}
 				\item Europarecht
@@ -165,12 +168,13 @@ child { node {\textbf{Eigenschaften}}
 				child { node {Annahme}}
 				child { node {\textbf{\href{https://www.gesetze-im-internet.de/bgb/__433.html}{§ 433}} Vertragstypische Pflichten beim Kaufvertrag}}}}
 		child[level distance=7.5cm, sibling angle=37] { node {einseitige Rechtsgeschäfte}
+		[clockwise from=30]
 			child { node {Testament}}
 			child { node {Kündigung}}
 			child { node {Widerruf}} }
-		child[level distance=14cm, sibling angle=40] { node {\textbf{Willenserklärung} \\ Willensäußerung die auf eine Rechtsfolge gerichtet ist.}
+		child[level distance=14cm, sibling angle=40] { node {\textbf{Willenserklärung} \\ Willensäußerung die auf eine Rechtsfolge gerichtet ist. \\ \href{https://youtu.be/4XvpPpcQ320?t=198}{[Video]}}
 		[clockwise from=80]
-			child { node {Invitaio ad offerendum \\ Sonderfall, das Angebot an die Allgemeinheit}}
+			child[level distance=9cm]{ node[text width=57mm] {\textbf{ad incertas personas} \\ das Angebot an die Allgemeinheit \\ \textbf{invitation ad offerendum} \\ die Einladung zur abgabe eines Angebotes \\ ist kein wirksames Angebot, da die Vertragsparteien nicht Festgelegt sind und ein erkennbarer Rechtsbindungswille fehlt.}}
 			child[level distance=10.5cm] { node {Wirksamwerden}
 					child { node {Empfangsbedürftige Willenserklärung}
 						[clockwise from=120]
@@ -198,11 +202,11 @@ child { node {\textbf{Eigenschaften}}
 				child[sibling angle=50,level distance=7cm] { node {\textbf{Falschbezeichnung} schadet nicht, wenn sie übereinstimmend geschieht.}}
 			}
 			}
-		child { node {\textbf{Anspruch} \\ Recht, von einem anderen ein Tun oder Unterlassen zu fordern }}
-	child[level distance=18cm, sibling angle=23] { node {\textbf{Geschäftsfähigkeit} \\ Fähigkeit, selbst durch eigen Willenserklärung Rechtsfolgen herbeizuführen.}
+		child { node {\textbf{Anspruch} \\ Recht, von einem anderen ein Tun oder Unterlassen zu fordern \\ \href{https://youtu.be/4XvpPpcQ320?t=21}{[Video]}}}
+	child[level distance=18cm, sibling angle=23] { node {\textbf{Geschäftsfähigkeit} \\ Fähigkeit, selbst durch eigen Willenserklärung Rechtsfolgen herbeizuführen.\href{https://www.youtube.com/watch?v=19r5JPeMqKE&list=PLmDXSisAu6U6OCPkn0bqsS45A9kBf88YZ&index=4}{[Video]}}
 	[clockwise from=90]
 		child[] { node {\textbf{\href{https://www.gesetze-im-internet.de/gg/art_2.html}{§ 2}} \\ Eintritt in die Volljährigkeit}}
-		child[level distance=15cm] { node {Geschäftsunfähigkeit}
+		child[level distance=15cm] { node[text width=45mm] {Geschäftsunfähigkeit}
 		[clockwise from=130]
 			child { node {\textbf{\href{https://www.gesetze-im-internet.de/bgb/__105a.html}{§ 105a}}\\ Geschäfte des täglichen Lebens}}
 			child { node {\textbf{\href{https://www.gesetze-im-internet.de/bgb/__104.html}{§ 104}} \\ Geschäfts\-unfähigkeit }}
@@ -216,7 +220,7 @@ child { node {\textbf{Eigenschaften}}
 			child { node {\textbf{\href{https://www.gesetze-im-internet.de/bgb/__107.html}{§§ 107}} \\ Einwilligung des gesetzlichen Vertreters}}
 			child { node {\textbf{\href{https://www.gesetze-im-internet.de/bgb/__106 .html}{§§ 106 ff.}} \\ Beschränkte Geschäftsfähigkeit Minderjähriger}}
 		}}
-		child[sibling angle=40] { node {\textbf{Stellvertretung} \\ ist bei allen Rechtsgeschäften außer bei höchstpersönlich z.B Testament, Heirat}
+		child[sibling angle=40] { node {\textbf{Stellvertretung} \\ ist bei allen Rechtsgeschäften außer bei höchstpersönlich z.B Testament, Heirat\\\href{https://www.youtube.com/watch?v=rU-81QXETsI&list=PLmDXSisAu6U6OCPkn0bqsS45A9kBf88YZ&index=5}{[Video]}\\\href{https://www.uni-trier.de/fileadmin/fb5/prof/ZIV008/stadler/KurzskriptStellvertretungsrecht.pdf}{[Kurzskript]}}
 			[clockwise from=90]
 				child[yshift=2cm,xshift=-1cm] { node {\textbf{eigene Willens\-erklärung} \\ das heißt Entscheidungsspielraum}
 				child { node {\textbf{\href{https://www.gesetze-im-internet.de/bgb/__165.html}{§ 165}} Beschränkt geschäftsfähiger Vertreter} }
@@ -245,13 +249,13 @@ child { node {\textbf{Eigenschaften}}
 				[clockwise from=10]
 					child[level distance=9cm] { node {Duldungs\-vollmacht}
 					[clockwise from=65]
-						child { node {auftreten als Vertreter}}
+						child { node {Auftreten als Vertreter}}
 						child { node {Vertretung wird wissentlich geduldet}}
 						child { node {\textbf{\href{https://www.gesetze-im-internet.de/bgb/__242.html}{§ 242}} Leistung nach Treu und Glauben \\ Dritter nimmt Innenvollmacht an}}
 						}
 					child[sibling angle=40] { node {Anscheins\-vollmacht}
 					[clockwise from=03]
-						child[sibling angle=40] { node {wiederholtes auftreten als Vertreter}}
+						child[sibling angle=40] { node {wiederholtes Auftreten als Vertreter}}
 						child[sibling angle=40] { node {fahrlässige Unkenntnis des Vertretenden}}
 						child[sibling angle=40] { node {\textbf{\href{https://www.gesetze-im-internet.de/bgb/__242.html}{§ 242}} Leistung nach Treu und Glauben \\ Dritter nimmt Innenvollmacht an}}
 						}
@@ -281,9 +285,8 @@ child[sibling angle=70] { node {Widerrufsrecht}
 	}
 	}
  		;
- \draw (55,-55) node[text width=65mm] {\Huge \textbf{Schuldverhältnis} \Large Kraft des Schuldverhältnisses ist der Gläubiger berechtigt, von dem Schuldner eine Leistung zu fordern. Die Leistung kann auch in einem
- Unterlassen bestehen.\\ \textbf{\Huge \href{https://www.gesetze-im-internet.de/bgb/__241.html}{§ 241}} }
- child[text width=60mm] { node {Trennungs- und Abstraktionsprinzip \\Das Sachenrechtliche \textbf{Verfügungsgeschäft} muss vom Schuldrechtlichen \textbf{Verpflichtungsgeschäfte} getrennt werden}
+ \draw (55,-55) node[text width=65mm] {\href{https://www.gesetze-im-internet.de/bgb/__241.html}{\Huge \textbf{§ 241 \\ Schuldverhältnis}} \Large Kraft des Schuldverhältnisses ist der Gläubiger berechtigt, von dem Schuldner eine Leistung zu fordern. Die Leistung kann auch in einem Unterlassen bestehen.\\ \href{https://www.youtube.com/watch?v=g6YWT-rTLuk&list=PLmDXSisAu6U4zgKS-squl9wuT13jEVKJr&index=1}{[Video kurz]}  \href{https://www.youtube.com/watch?v=riKwEnti2ak&list=PLVm4A7JDBCVbuQr1w3aRxIr7KINFrQlek&index=1&t=92}{[Video lang]} }
+ child[text width=60mm, level distance=11cm] { node {Trennungs- und Abstraktionsprinzip \\Das Sachenrechtliche \textbf{Verfügungsgeschäft} muss vom Schuldrechtlichen \textbf{Verpflichtungsgeschäfte} getrennt werden \href{https://www.youtube.com/watch?v=k-QTFj4n64I&list=PLmDXSisAu6U6OCPkn0bqsS45A9kBf88YZ&index=3}{[Video]}}
  [clockwise from=00]
 	child[level distance=10cm, text width=63mm] { node {Verpflichtungsgeschäft: \\ Jedes Rechtsgeschäft, das lediglich die Verpflichtung zu einer Leistung Begründet und damit ein Schuldverhältnis zum Entstehen bringt. z.B \textbf{\href{https://www.gesetze-im-internet.de/bgb/__433.html}{§ 433}} Kaufvertrag}}
 	child[level distance=10cm, sibling angle=53, text width=63mm] { node {Verfügungsgeschäft jedes Rechtsgeschäft, das unmittelbar darauf gerichtet ist, die Rechtslage zu ändern (z.B. durch Veränderung, Übertragung, Belastung, Aufhebung eines Rechts) z.B \textbf{\href{https://www.gesetze-im-internet.de/bgb/__929.html}{§ 929 Übereignung}}}}
@@ -352,7 +355,7 @@ child { node {Erfüllungssurrogat}
 	child { node {Leistung erüllungshalber}}
 	child { node {\textbf{\href{https://www.gesetze-im-internet.de/bgb/__387.html}{§ 387}} Aufrechnung \\ Gegenseitigkeit \\ Gleichartigkeit \\ Fälligkeit \\ einredefreiheit}}
 }
-child[sibling angle=63] { node {Leistungs\-störungsrecht \\ \textbf{\href{https://www.gesetze-im-internet.de/bgb/__275.html}{§ 275}} Unmöglichkeit \\ Geld hat man zu haben! \\ \textbf{\href{https://www.gesetze-im-internet.de/bgb/__313.html}{§ 313}}}
+child[sibling angle=63] { node[text width=50mm] {Leistungs\-störungsrecht \\ \textbf{\href{https://www.gesetze-im-internet.de/bgb/__275.html}{§ 275}} Unmöglichkeit \\ Geld hat man zu haben! \\ \textbf{\href{https://www.gesetze-im-internet.de/bgb/__313.html}{§ 313}}}
 		child[sibling angle=50] { node {Folgen}
 			child { node {\textbf{\href{https://www.gesetze-im-internet.de/bgb/__326.html}{§ 326}} Befreiung von der Gegenleistung}}
 			child { node {Anspruch auf Schadensersatz statt der Leistung}
