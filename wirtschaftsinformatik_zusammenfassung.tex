@@ -22,6 +22,8 @@
 \usepackage{forest}
 \usepackage{textcomp}
 \usepackage{multicol}
+\usepackage{booktabs}
+\usepackage{float}
 \usepackage{makecell}
 \usepackage[makeroom]{cancel}
 \usepackage{lscape}
@@ -51,27 +53,71 @@
 \begin{document}
 
 
+\section{Hardware}
+
+Alle physischen Teile eines Computers. 
+
 \paragraph{EVA}
 	\begin{itemize}
 		\item[E]ingabe
 		\item[V]erarbeitung
 		\item[A]usgabe
 	\end{itemize}
+
+\paragraph{Input Kategorisierung\\\\}
 	\begin{forest} for tree={grow'=0,anchor=west},
 		[Input [Halbdirekt [Urbeleg] [Plastikkarten]]  [Direkt [Automatisch][Manuell[Online-Datenerfassung][Dialog-Eingabe]] [Akustisch]]]
 	\end{forest}
 
-\paragraph{RFID}
-	Radio-frequency identification
+\begin{figure}[H]
+	\paragraph{$\qquad \quad$ Informationssystem Eingabe\\}
+\advance\leftskip-1.2cm
+\begin{tabular}{L{30mm}L{30mm}L{30mm}}
+	\toprule
+	\multicolumn{3}{c}{Eingabe/Kodierung} \\
+	\cmidrule(l){1-3}
+	\textbf{verhalten} & \textbf{eingeben} & \textbf{bedienen(IT)} \\
+	\textbf{nicht kommunizieren} & sprechen & Tastatur \\
+	laufen, blicken & schreiben & Maus/Stift \\
+	\textbf{kommunizieren} & zeichnen & Toucheingabe \\
+	sprechen & fotografieren & \\
+	sprechen, gestikulieren \\
+	\cmidrule(l){1-3}
+	\textbf{aufnehmen} & \textbf{erkennen} & \textbf{weiterverarbeiten} \\
+	-
+	Bild aufnehmen     &  Bilder interpretieren & Daten \\
+	Sprache aufnehmen& Sprache erkennen \\
+	Blicke registrieren& Emotionen interpretieren \\
+	Handschrift erkennen& Schrift Erkennen \\
+	Musik aufnehmen& Musik klassifizieren \\
+	\bottomrule
+\end{tabular}
+\end{figure}
 
-\paragraph{NFC}
-	Near-field communication
+\paragraph{Texteingabe Beispiel}
+\begin{itemize}
+	\item Tastatur
+	\item Digitalstift
+	\item Infrarottastatur
+	\item Handbewegungserkennung
+	\item OCR (Optical Character Recognition}
+\end{itemize}
 
-\paragraph{Zentraleinheit \\}
+\paragraph{Sprache}
+ist für den Menschen einfacher, da sie natürlicher ist. Für Maschinen ist sie schwieriger, da die Mustererkennung deutlich schwieriger ist.
+
+\begin{itemize}
+	\item Erhebung von relevantem Vokabular, Satzkonstruktionen
+	\item Aussprachelexika
+	\item Mixed-Initiative-Dialoge: Sammlung möglicher Antworten
+	\item Tests und Trainings in Sprachlaboren
+\end{itemize}
+
+\paragraph{Zentraleinheit \\\\}
 	\begin{tikzpicture}
 		\path 	(2,3)	node[draw, minimum width=70mm] (a) 	{Bus}
-			(-1,1.5)	node[draw, text width=16mm] (b)  	{Zentral- Prozessor}
-			(5,1.5)	node[draw, text width=16mm] (c)  	{Ein-/Aus- gabe- Kanäle}
+			(-1,1.5)	node[draw, text width=16mm] (b)  	{Zentral\-prozessor}
+			(5,1.5)	node[draw, text width=16mm] (c)  	{Ein-/Aus\-gabe\-Kanäle}
 			(1,0)	node[draw, text width=16mm] (d)  	{Arbeits speicher}
 			(3,0)	node[draw, text width=16mm] (e)  	{Festwert speicher};
 		\draw (b) to (b|-a.south);
@@ -82,7 +128,7 @@
 		\draw (2,-1) node {Hauptspeicher};
 	\end{tikzpicture}
 
-\paragraph{Zentralprozessor \\}
+\paragraph{Zentralprozessor \\\\}
 	\begin{tikzpicture}
 		\path 	(2,2)	node[draw] (a) 		{Ein-/Ausgabewerk}
 			(0.5,1)	node[draw] (b)  	{Rechenwerk}
@@ -129,24 +175,11 @@
 	\item Betriebssystem
 \end{itemize}
 
-\paragraph{Customizing}
-	Die Anpassung von Standardsoftware an spezielle Bedürfnisse von Nutzern.
+\section{Software}
 
-\paragraph{Hardware}
-	Alle physischen Teile eines Computers. 
-
-\paragraph{Fakturierung \\}
-	Rechnungsstellung
-
-\paragraph{Software}
-	\texttt{Definition aus der Vorlesung:} \\ 
-	PrOgRaMmE, dIe iN eInEr PrOgRaMmIeRsPrAcHe gEscHriEbEn sInD. \\
-	\texttt{Sinnvolle Definition:} \\
-	Eine Ansammlung von Daten oder Instruktionen, die in einem Computersystem ein bestimmtest Verhalten hervorruft. \\\\
 	\begin{flushleft}
-
 	\begin{forest}
-	[Software,draw 			
+	[Software \footnotemark,draw 			
 	[Systemsoftware,draw 
 		[Betriebssystem
 		[Übersetzungsprogramm \footnotemark
@@ -160,12 +193,59 @@
 		[Individual\\software, align=center]]]
 	\end{forest}
 	\end{flushleft}
-\footnotetext[2]{Compiler / Interpreter}
-\footnotetext[3]{Dies sind Programme welche allgemeine Aufgaben erledigen, wie das Kopieren von Dateien oder die Verbindung zu einem WLAN-Netz}
-\footnotetext[4]{Mir ist nicht ganz klar, warum hier Protokolle erwähnt werden bzw. welche Protokolle gemeint sind. Die meisten Netzwerkprotokolle wie HTTP, FTP, oder SMTP (e-mail) werden von den sie nutzenden Anwendungen selber implementiert. Auch eine  SSH Implementierung bei UNIX-Systemen würde ich eher als Dienstprogramm kategorisieren.}
-\footnotetext[5]{Bei Windows nicht. lol}
-\footnote{An dieser Stelle möchte ich anmerken, dass obige Grafik -- zumindest bei alleiniger Konsultation des Skriptes -- keiner mir erkennbaren Logik folgt und nur aus vollkommen willkürlich zusammengewürfelten Wörtern besteht. Verständlich wird es erst mit der Zuhilfenahme des Buches "Grundzüge der Wirtschaftsinformatik" von Peter Mertens Die Obigen Erklärungen sind diesem entnommen. Dem Skript scheint es zu mühselig zu sein verwendete Begriffe zu erklären.}
+\footnotetext[2]{Hier möchte ich anmerken, dass diese Grafik -- zumindest bei alleiniger Konsultation des Skriptes -- keiner mir erkennbaren Logik folgt und nur aus vollkommen willkürlich zusammengewürfelten Wörtern besteht. Verständlich wird es erst mit der Zuhilfenahme des Buches "Grundzüge der Wirtschaftsinformatik" von Peter Mertens Die Obigen Erklärungen sind diesem entnommen. Dem Skript scheint es zu mühselig zu sein verwendete Begriffe zu erklären.}
+\footnotetext[3]{Compiler / Interpreter}
+\footnotetext[4]{Dies sind Programme welche allgemeine Aufgaben erledigen, wie das Kopieren von Dateien oder die Verbindung zu einem WLAN-Netz}
+\footnotetext[5]{Mir ist nicht ganz klar, warum hier Protokolle erwähnt werden bzw. welche Protokolle gemeint sind. Die meisten Netzwerkprotokolle wie HTTP, FTP, oder SMTP (e-mail) werden von den sie nutzenden Anwendungen selber implementiert. Auch eine  SSH Implementierung bei UNIX-Systemen würde ich eher als Dienstprogramm kategorisieren.}
+\footnotetext[6]{Bei Windows nicht. lol}
 
+\paragraph{Customizing}
+	Die Anpassung von Standardsoftware an spezielle Bedürfnisse von Nutzern.
+
+
+\paragraph{Fakturierung \\}
+	Rechnungsstellung
+
+\paragraph{Software}
+	\texttt{Definition aus der Vorlesung:} \\ 
+	PrOgRaMmE, dIe iN eInEr PrOgRaMmIeRsPrAcHe gEscHriEbEn sInD. \\
+	\texttt{Sinnvolle Definition:} \\
+	Eine Ansammlung von Daten oder Instruktionen, die in einem Computersystem ein bestimmtest Verhalten hervorruft. \\\\
+
+
+\paragraph{Informationssystem}
+	Informationssysteme sind soziotechnische Systeme aus Mensch und Technik zur Erfüllung einer Aufgabe. Sie erfassen, verarbeiten, speichern und übertragen Informationen.
+
+\paragraph{Anwendungssysteme} Anwendungssysteme sind technische Systeme aus Hard- und Software (im 
+Informationssystem). 
+
+\paragraph{Gestaltung von informationssystemen im Unternehmen}
+\begin{itemize}
+	\item Konzeption
+	\item Entwicklung
+	\item Einführung
+	\item Wartung
+	\item Nutzung
+	\item Zielgerichteter Einsatz
+\end{itemize}
+
+\paragraph{Gestaltung von Informationssystemen in der Wirtschaft \\}
+	\begin{tikzpicture}
+		[thick]
+		\coordinate (a) at (0,0);
+		\coordinate (b) at (3.2,0);
+		\coordinate (c) at (6.4,0);
+		\draw (a) node[text centered, text width=20mm, scale=0.9] (d) {Wirtschaft};
+		\draw (b) node[text centered, text width=20mm, scale=0.9] (e) {Wirtschafts\-informatik};
+		\draw (c) node[text centered, text width=22mm, scale=0.85] (f) {Informations\-technik};
+		\draw (a) node[draw, regular polygon, regular polygon sides=6, text centered, text width=22mm, scale=0.5] (d) {};
+		\draw (b) node[draw, regular polygon, regular polygon sides=6, text centered, text width=22mm, scale=0.5] (e) {};
+		\draw (c) node[draw, regular polygon, regular polygon sides=6, text centered, text width=22mm, scale=0.5] (f) {};
+		\draw[<-] (d) to node[midway, above] {\small gestalten} (e);
+		\draw[->] (e) to node[midway, above] {\small erkennt} (f);
+		\draw[->] (d) edge [bend left=37] node[midway, above] {nutzt} (f);
+		\draw[<-] (d) edge [bend right=37] node[midway, below] {beeinflusst} (f);
+	\end{tikzpicture}
 \paragraph{Cloud-Computing Merkmale}
 	\begin{itemize}
 		\item On-Demand Self-Service
@@ -257,6 +337,11 @@ f \left(\text{Bias} + \sum_{i=1}^{n} \text{Input}_i \cdot \text{Weight}_i \right
 	 Workgroup-Support-Systeme \\
 	 unterstützt Themas bei der Bearbeitung eher unstrukturierter Aufgaben, wobei die Teamarbeit meist orts- und zeitunabhängig erfolgt.
 
+\paragraph{RFID}
+	Radio-frequency identification
+
+\paragraph{NFC}
+	Near-field communication
 \paragraph{Prozessorientierung}
 	Hierbei wird der Fokus der Betrachtung auf einen Prozess gelegt. Zum Beispiel die Konzeptionierung und Auslieferung eines Produktes vom Beginn bis zum Ende. 
 
@@ -388,27 +473,8 @@ von Software}
 
 \paragraph{Informationssysteme} sind soziotechnische Systeme aus Mensch und Technik zur Erfüllung einer Aufgabe sie erfasse, verarbeiten, speichern und übertragen Informationen.
 
-\paragraph{Anwenungssysteme} sind technische Systeme aus Hard- und Software (im Informationssystem)
+\paragraph{Anwendungssysteme} sind technische Systeme aus Hard- und Software (im Informationssystem)
 
-\paragraph{Informationssysteme} sind 
-
-\paragraph{Gestaltung von Informationssystemen in der Wirtschaft \\}
-	\begin{tikzpicture}
-		[thick]
-		\coordinate (a) at (0,0);
-		\coordinate (b) at (3.2,0);
-		\coordinate (c) at (6.4,0);
-		\draw (a) node[text centered, text width=20mm, scale=0.9] (d) {Wirtschaft};
-		\draw (b) node[text centered, text width=20mm, scale=0.9] (e) {Wirtschafts\-informatik};
-		\draw (c) node[text centered, text width=22mm, scale=0.85] (f) {Informations\-technik};
-		\draw (a) node[draw, regular polygon, regular polygon sides=6, text centered, text width=22mm, scale=0.5] (d) {};
-		\draw (b) node[draw, regular polygon, regular polygon sides=6, text centered, text width=22mm, scale=0.5] (e) {};
-		\draw (c) node[draw, regular polygon, regular polygon sides=6, text centered, text width=22mm, scale=0.5] (f) {};
-		\draw[<-] (d) to node[midway, above] {\small gestalten} (e);
-		\draw[->] (e) to node[midway, above] {\small erkennt} (f);
-		\draw[->] (d) edge [bend left=37] node[midway, above] {nutzt} (f);
-		\draw[<-] (d) edge [bend right=37] node[midway, below] {beeinflusst} (f);
-	\end{tikzpicture}
 
 \paragraph{Wissen}
 	Gesamtheit der Kenntnisse und Fähigkeiten eines Individuums.
@@ -469,11 +535,6 @@ von Software}
 		\draw (f) node[right=15mm] {+ Einzigartigkeit};
 	\end{tikzpicture}
 
-\paragraph{Informationssystem}
-	Informationssysteme sind soziotechnische Systeme aus Mensch und Technik zur Erfüllung einer Aufgabe. Sie erfassen, verarbeiten, speichern und übertragen Informationen.
-
-\paragraph{Anwendungssysteme} Anwendungssysteme sind technische Systeme aus Hard- und Software (im 
-Informationssystem). 
 
 \paragraph{Industrie 1.0}
 	Automatisierung durch Dampfkraft, Mechanisierung
