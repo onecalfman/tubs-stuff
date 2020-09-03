@@ -380,3 +380,56 @@
 * Kultur der Kooperation 580
 * Kooperation in sozialen Medien 581
 * Digital Leadership vs Traditionell Führung 584-585
+
+# Digitales Management und digitale Services
+## Erfolg auf heutigen Märkten
+* Was passiert da draußen / Disruption 589
+* Airbnb 590
+* MOIA 591
+* Hello Fresh 592
+* Problemlösung für Kunden anbieten 594
+* Servification 595
+
+## Product, Service, e-Service
+* Geschickte Anbieter schaffen Wert 600
+* Dienste statt Produkte Dienstleistungen wecken den Wert 601
+* Dienste statt Produkte Wert des Autos 602
+* Individualisierung von Produkten 603
+* Problemlösungen 604
+
+## Digitales Management
+* Digitale Transformations 606
+* VUCA Volatility Uncertainty Complexity Ambiquity 608
+* KASI Umgang mit VUCA - Kollaboration Agilität Service Intelligenz 609
+* Extern: Zusammenarbeit auf neuen Märkten 610
+* Akteur-Netzwerke: Illustration 611
+* Ökosystem in der Mobilität 612
+* DIY/Maker 613
+
+## (Digitale) Geschäftsmodelle
+* Geschäftsmodelle (Definition) 615
+* Geschäftsmodell nach Osterwalder/Pigneur 616
+* Geschäftsmodellbeispiel: Nespresso 617
+* Erlösmodelle 618
+* Dreiecksbeziehung:werbefinanzierter Medien 619
+* Dreiecksbeziehung heute: Plattformen 620
+* Erfolgsfaktoren 621-622
+* Erfolgsfaktor Digitale Kundenschnittstelle 623
+* Nutzen aus Kundendaten: datengetriebene Geschäftsmodelle 625
+* Kundenbeobachtung 626
+* Beispiel: Amazon 627
+* Erfolgsfaktor Kooperation mit allen Partnern 628
+* From Pipe to Plattform 629
+* Private Partner: Peer-2-Peer-Sharing 630
+* Peer-2-Peer-Sharing: Formen 631
+* Ubiquität: Folgen der Überallverfügbarkeit 633
+* Umgang mit Wissen 634
+* eServices: Wieviel Luxus ist möglich 635
+* eServices: Wissen wir, was wir wollen? 636
+* Was lehren uns "automatisierte Märkte"? 637
+* Folgen der automatischen, allgegenwärtigen Passung? 638
+* Wie weit geht der Gläserne Bürger 639
+* Wie weit wollen wir uns vermessen? 640
+* Neue Arbeitsmodelle 641
+* Beziehung über soziale Medien 642
+* Kooperation über soziale Medien 643
