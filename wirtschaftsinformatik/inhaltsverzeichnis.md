@@ -1,6 +1,7 @@
 # Einführung
 <details>
   <summary> Contents </summary>
+  
 * Laura 3-5
 * Informatik im Alltag 6-..
 * E-Commerce 11-13
@@ -18,6 +19,7 @@
 * Gestaltung von Informationssystemen 49-51
 * Fachgebiete der Wirtschaftsinformatik
 </details>
+
 # Hardware 
 * Hardware Definition 61
 
