@@ -1,6 +1,6 @@
 # Einführung
 <details>
-  <summary> Contents </summary>
+  <summary> # Contents </summary>
   
 * Laura 3-5
 * Informatik im Alltag 6-..
