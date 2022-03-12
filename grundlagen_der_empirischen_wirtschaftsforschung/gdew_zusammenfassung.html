@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Jonas Walkling" />
+  <title>Ökonometrie Zusammenfassung</title>
+  <style>
+    html {
+      line-height: 1.5;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      word-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Ökonometrie Zusammenfassung</h1>
+<p class="author">Jonas Walkling</p>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#definitionen">Definitionen</a></li>
+<li><a href="#ols">OLS</a>
+<ul>
+<li><a href="#herleitungen-der-parameter">Herleitungen der Parameter</a>
+<ul>
+<li><a href="#momentenmethode">Momentenmethode</a></li>
+<li><a href="#minimierungsproblem">Minimierungsproblem<br />
+</a></li>
+</ul></li>
+<li><a href="#Annahmen">Annahmen OLS</a></li>
+<li><a href="#eigenschaften-ols">Eigenschaften OLS</a></li>
+<li><a href="#qualität-ols">Qualität OLS</a>
+<ul>
+<li><a href="#eigenschafen">Eigenschafen</a></li>
+<li><a href="#unverzerrtheit">Unverzerrtheit</a></li>
+<li><a href="#varianz-und-kovarianz-von-ols">Varianz und Kovarianz von OLS</a></li>
+<li><a href="#schätzer-hatsigma2">Schätzer <span class="math inline">\(\; \hat{\sigma}^2\)</span></a></li>
+</ul></li>
+<li><a href="#bestimmtheitsmaß-r2">Bestimmtheitsmaß <span class="math inline">\(R^2\)</span></a>
+<ul>
+<li><a href="#herleitung">Herleitung</a></li>
+</ul></li>
+<li><a href="#gauss-markov-theorem">Gauss-Markov-Theorem</a></li>
+<li><a href="#asymptotische-eigenschaften">Asymptotische Eigenschaften</a>
+<ul>
+<li><a href="#konsistenz">Konsistenz</a></li>
+<li><a href="#asymptotische-normalverteilung">Asymptotische Normalverteilung</a></li>
+<li><a href="#asymptotische-effizienz">Asymptotische Effizienz</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#intervallschätzung-und-hypothesentests">Intervallschätzung und Hypothesentests</a>
+<ul>
+<li><a href="#intervalschätzer">Intervalschätzer</a>
+<ul>
+<li><a href="#schritte">Schritte</a></li>
+<li><a href="#normalverteilung">Normalverteilung</a></li>
+<li><a href="#t-verteilung">T-Verteilung</a></li>
+</ul></li>
+<li><a href="#einfache-hypothesentests">Einfache Hypothesentests</a></li>
+<li><a href="#zweiseitige-hypothesentests">Zweiseitige Hypothesentests</a></li>
+<li><a href="#fehlerarten">Fehlerarten</a></li>
+</ul></li>
+<li><a href="#logarithmen">Logarithmen</a></li>
+<li><a href="#multivariates-modell">Multivariates Modell</a>
+<ul>
+<li><a href="#heteroskedastizität">Heteroskedastizität</a>
+<ul>
+<li><a href="#maßnahmen-gegen-heteroskedastizität">Maßnahmen gegen Heteroskedastizität</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+<h1 id="definitionen">Definitionen</h1>
+<dl>
+<dt>Mittelwert</dt>
+<dd><span class="math inline">\(\displaystyle \bar{x}=\frac{1}{n} \sum_{i=1}^{n} x_{i}\)</span>
+</dd>
+<dt>Varianz</dt>
+<dd><span class="math inline">\(\displaystyle \operatorname{VAR}(x) = s_{x}^{2}=\frac{1}{n-1} \sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}\)</span>
+</dd>
+<dt>Covarianz</dt>
+<dd><span class="math inline">\(\displaystyle \operatorname{COV}(x,y) = c_{x y}\)</span><br />
+<span class="math inline">\(=\frac{1}{n-1} \sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)\left(y_{i}-\bar{y}\right)\)</span>
+</dd>
+<dt>Sample Regression Function</dt>
+<dd><span class="math inline">\(\displaystyle \hat{y}=b_{1}+b_{2} x\)</span>
+</dd>
+<dt>Fittet Values / Vorhersage</dt>
+<dd><span class="math inline">\(\displaystyle \hat{y}_{i}=b_{1}+b_{2} x_{i}\)</span>
+</dd>
+<dt>Residual</dt>
+<dd><span class="math inline">\(\displaystyle \hat{u}_{i}=y_{i}-\hat{y}_{i}\)</span>
+</dd>
+<dt>Fehlerterm</dt>
+<dd><span class="math inline">\(u_{i} = y_{i}-E\left(y_i \mid x_{i}\right)\)</span>
+</dd>
+<dt>Bestimmtheitsmaß</dt>
+<dd><span class="math inline">\(\displaystyle R^{2}=\frac{\operatorname{var}(\hat{y})}{\operatorname{var}(y)}=1-\frac{\operatorname{var}(\hat{u})}{\operatorname{var}(y)}\)</span>
+</dd>
+<dt>Geschätzter Standardfehler:</dt>
+<dd><span class="math inline">\(\hat{\sigma}_{b_{k}}=\sqrt{\operatorname{var}\left(b_{k}\right)}\)</span>
+</dd>
+</dl>
+<h1 id="ols">OLS</h1>
+<h2 id="herleitungen-der-parameter">Herleitungen der Parameter</h2>
+<h3 id="momentenmethode">Momentenmethode</h3>
+<p><span class="math display">\[\begin{align*}
+u&amp;=y-\beta_{1}-\beta_{2} x \\
+E(u) &amp;= \mathrm{E}\left(y-\beta_{1}-\beta_{2} x\right) = 0  \\
+&amp; \Rightarrow \frac{1}{n} \sum\left(y_{i}-b_{1}-b_{2} x_{i}\right)=0 \\
+\mathrm{E}(x \cdot u) &amp;= E\left[x \cdot\left(y-\beta_{1}-\beta_{2} x\right)\right] =0\\
+&amp; \Rightarrow \frac{1}{n} \sum\left[x_{i} \cdot\left(y_{i}-b_{1}-b_{2} x_{i}\right)\right]=0\\
+\\
+b_{1} &amp;=\bar{y}-b_{2} \bar{x} \\
+b_{2} &amp;=\frac{\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)\left(y_{i}-\bar{y}\right)}{\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}} =\frac{S_{x y}}{S_{x}^{2}}
+\end{align*}\]</span></p>
+<h3 id="minimierungsproblem">Minimierungsproblem<br />
+</h3>
+<p><span class="math inline">\(\displaystyle \min_{b_{1}, b_{2}} \sum_{i=1}^{N} \hat{e}_{i}^{2}=\min _{b_{1}, b_{2}} \sum_{i=1}^{N}\left(y_{i}-b_{1}-b_{2} x_{i}\right)^{2}\)</span></p>
+<p><span class="math display">\[\begin{align*}
+\frac{\partial \sum \hat{e}^2}{\partial b_1} &amp; = -2 \sum \hat{e} = 0   \\
+&amp; \Rightarrow \sum_N (y - b_1 - b_2 x ) = 0 \\
+&amp; \Leftrightarrow \sum y = \sum b_1 + b_2 \sum x \\
+&amp; \Leftrightarrow \bar{y} N = N b_1 + b_2 \sum \bar{x} N \\
+&amp; \Leftrightarrow b_1 = \bar{y} - b_2 \bar{x} \\
+\\
+\frac{\partial \sum \hat{e}^2}{\partial b_2} &amp; = -2 \sum \hat{e} x = 0 \\
+&amp; \Rightarrow \sum\left(y-b_{1}-b_{2} x\right) x=0 \\
+&amp; \Leftrightarrow \sum\left(y-\left(\bar{y}-b_{2} \bar{x}\right)-b_{2} x\right) x=0 \\
+&amp; \Leftrightarrow \sum \left(y-\bar{y}-b_{2}(x-\bar{x})\right) x=0 \\
+&amp; \Leftrightarrow \sum(y-\bar{y})_{x}=b_{2} \sum(x-\bar{x}) x \\
+&amp; \Leftrightarrow  b_2 = \frac{\sum(x-\bar{x})(y-\bar{y})}{\sum(x-\bar{x})^{2}} =\frac{S_{x y}}{S_{x}^{2}}
+\end{align*}\]</span></p>
+<p>Substitutionen: <span class="math display">\[\begin{align*}
+\bar{x} &amp; = \frac{1}{N} \sum_N x \\
+\bar{x} N &amp; = \sum_N x\\
+\sum (x-\bar{x}) x &amp; = \sum (x-\bar{x})^{2} \\
+\sum(y-\bar{y})x &amp; =\sum(y-y)(x-\bar{x})
+\end{align*}\]</span></p>
+<h2 id="Annahmen">Annahmen OLS</h2>
+<ol type="1">
+<li>Linearität von <span class="math inline">\(y=\beta_{2}+\beta_{2} x+e\)</span></li>
+<li>Stichprobenvarianz</li>
+<li>Zufallsstichprobe <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> <span class="math inline">\(\left(x_{i}, y_{i}\right)\)</span> ist unabhängig von <span class="math inline">\(\left(x_{j}, y_{j}\right)\)</span></li>
+<li>Konditionaler Erwartungswert = 0 = <span class="math inline">\(E(e \mid x)\)</span></li>
+<li>Homoskedastizität <span class="math inline">\(\operatorname{var}\left(e_{i} \mid X_{i}\right)=\sigma^{2}\)</span></li>
+<li>Die Verteilung des Störterms, konditional auf <span class="math inline">\(x_i\)</span>, ist normal: <span class="math inline">\(e_{i} \mid x_{i} \sim \mathcal{N}\left(0, \sigma^{2}\right)\)</span></li>
+</ol>
+<h2 id="eigenschaften-ols">Eigenschaften OLS</h2>
+<ol type="1">
+<li><p>Summe der OLS-Residuen = 0<br />
+<span class="math inline">\(\sum_{i} \hat{e}_{i}=\overline{\hat{e}}=0\)</span></p></li>
+<li><p>gefitterer Mittelwert = beobachteter Mittelwert <span class="math display">\[\begin{aligned}\\&amp;\hat{e}_{i}=y_{i}-\hat{y}_{i} \rightarrow \sum_{i} \hat{e}_{i}=\sum_{i} y_{i}-\sum_{i} \hat{y}_{i}\\&amp;\frac{1}{N} \sum_{i} \hat{e}_{i}=\frac{1}{N} \sum_{i} y_{i}-\frac{1}{N} \sum_{i} \hat{y}_{i}\\&amp;\overline{\hat{e}}=\bar{y}-\overline{\hat{y}}=0 \quad \text { wenn } \quad \overline{\hat{e}}=0 \text { (siehe 1.) gilt weiter }\\&amp;\overline{\hat{y}}=\bar{y}\\\end{aligned}\]</span> (gilt nur mit Interzept)</p></li>
+<li><p><span class="math inline">\(\sum_{i} \hat{e}_{i} x_{i}=0 \vee \operatorname{cov}\left(x_{i}, \hat{e}_{i}\right)=0\)</span> <span class="math display">\[\begin{array}{l}\\\sum_{i}\left(x_{i}-\bar{x}\right)\left(\hat{e}_{i}-\overline{\hat{e}}\right)=\sum_{i} x_{i} \hat{e}_{i}-\bar{x} \sum_{i} \hat{e}_{i}=0 \quad \text { wenn } \\\\\sum_{i} \hat{e}_{i}=\overline{\hat{e}}=0\\\end{array}\]</span></p></li>
+<li><p><span class="math inline">\(\operatorname{cov}\left(\hat{y}_{i}, \hat{e}_{i}\right)=0\)</span> <span class="math display">\[\begin{aligned}
+\operatorname{cov}\left(\hat{y}_{i}, \hat{e}_{i}\right)&amp;=\operatorname{cov}\left(\left[b_{1}+b_{2} x_{i}\right], \hat{e}_{i}\right)\\
+&amp; =\operatorname{cov}\left(b_{1}, \hat{e}_{i}\right)+\operatorname{cov}\left(b_{2} x_{i}, \hat{e}_{i}\right) \\
+&amp; =0+b_{2} \operatorname{cov}\left(x_{i}, \hat{e}_{i}\right)\\
+&amp; =0
+\end{aligned}\]</span> (mit Interzept)</p></li>
+</ol>
+<h2 id="qualität-ols">Qualität OLS</h2>
+<p>Der OLS-Schätzer liefert für verschiedene Stichproben verschieden Werte. Die Schätzer selbst sind damit Zufallsvariablen.</p>
+<h3 id="eigenschafen">Eigenschafen</h3>
+<ul>
+<li>Erwartungstreue <span class="math display">\[E\left[b_{2}\right]=\beta_{2}\]</span></li>
+<li>Effizienz (Geringe Stichprobenvariation) <span class="math display">\[\operatorname{var}\left[b_{2}\right]&lt;\operatorname{var}\left[b_{2}^{*}\right]\]</span></li>
+<li>Konsistenz (Ein Schätzer wird mit zunehmender Stichprobengröße genauer) <span class="math display">\[\lim_{N \rightarrow \infty} P\left[\left|b_{N}-\beta\right|&lt;\delta\right]=1 \quad \delta&gt;0\]</span></li>
+</ul>
+<h3 id="unverzerrtheit">Unverzerrtheit</h3>
+<dl>
+<dt>Erwartungstreue/Unverzerrtheit</dt>
+<dd><span class="math inline">\(E(\hat{\theta})=\theta\)</span>
+</dd>
+<dt>Konsistenz</dt>
+<dd><span class="math inline">\(\operatorname{var}(\hat{\theta}) \rightarrow 0, \quad \text{für} \quad n \rightarrow \infty\)</span>
+</dd>
+</dl>
+<h4 id="relation-zwischen-beta_2-und-b_2-herstellen">Relation zwischen <span class="math inline">\(\beta_2\)</span> und <span class="math inline">\(b_2\)</span> herstellen</h4>
+<p><span class="math display">\[\begin{aligned}
+b_{2} &amp;=\frac{\sum_{i}\left(x_{i}-\bar{x}\right)\left(y_{i}-\bar{y}\right)}{\sum_{i}\left(x_{i}-\bar{x}\right)^{2}} \\
+ &amp;=\frac{\sum_{i}\left(x_{i}-\bar{x}\right)\left(\beta_{1}+\beta_{2} x_{i}+e_{i}-\beta_{1}-\beta_{2} \bar{x}-\bar{e}\right)}{\sum_{i}\left(x_{i}-\bar{x}\right)^{2}}\\
+ &amp;=\frac{\sum_{i}\left(x_{i}-\bar{x}\right) \beta_{2}\left(x_{i}-\bar{x}\right)}{\sum_{i}\left(x_{i}-\bar{x}\right)^{2}}+\frac{\sum_{i}\left(x_{i}-\bar{x}\right)\left(e_{i}-\bar{e}\right)}{\sum_{i}\left(x_{i}-\bar{x}\right)^{2}} \\
+ &amp;=\beta_{2}+\frac{\sum_{i}\left(x_{i}-\bar{x}\right)\left(e_{i}-\bar{e}\right)}{\sum_{i}\left(x_{i}-\bar{x}\right)^{2}}
+\end{aligned}\]</span></p>
+<h5 id="substitutionen">Substitutionen:</h5>
+<p><span class="math display">\[\begin{align*}
+\sum \left(x_{i}-\bar{x}\right)&amp;=0\\
+\sum x_i-n \cdot \bar{x}&amp;=0
+\end{align*}\]</span></p>
+<h4 id="erwartungswert-bilden">Erwartungswert Bilden</h4>
+<p><span class="math display">\[\begin{aligned} E\left(b_{2}\right) &amp;=\beta_{2}+\sum_{i} E\left(\frac{\left(x_{i}-\bar{x}\right)\left(e_{i}-\bar{e}\right)}{\sum_{i}\left(x_{i}-\bar{x}\right)^{2}}\right) \\
+&amp;=\beta_{2}+\sum_{i} \frac{E\left(\left(x_{i}-\bar{x}\right)\left(e_{i}-0\right)\right)}{\sum_{i}\left(x_{i}-\bar{x}\right)^{2}} \\
+&amp;=\beta_{2}+\sum_{i} \frac{E(cov(x_i,e_i))}{\sum_{i}\left(x_{i}-\bar{x}\right)^{2}}
+\end{aligned}\]</span></p>
+<h4 id="unverzerrtheit-von-b_1">Unverzerrtheit von <span class="math inline">\(b_1\)</span><br />
+</h4>
+<p>Unter der Annahme, dass <span class="math inline">\(b_2\)</span> unverzerrt ist gilt: <span class="math display">\[E\left(b_{1}\right)=E\left(\left[\beta_{1}+\beta_{2} \bar{X}\right]-b_{2} \bar{X}\right)=\beta_{1}\]</span></p>
+<h4 id="beispiel">Beispiel</h4>
+<p><span class="math display">\[T_{1}=\bar{X}, \quad X \sim \mathcal{N}\left(\mu, \sigma^{2}\right), \quad E(X)=\mu, \quad \operatorname{var}(X)=\sigma^{2}\]</span> <span class="math display">\[\begin{align*}
+E\left(T_{1}\right)&amp;=E(\bar{X})=E\left(\frac{1}{n} \sum_{i=1}^{n} X_{i}\right) \\
+&amp;=\frac{1}{n} \sum_{i=1}^{n} E\left(X_{i}\right) \\
+&amp;=\frac{1}{n} \sum_{i=1}^{n} \mu=\frac{1}{n} n \mu=\mu \\
+\\
+\operatorname{var}\left(T_{1}\right)&amp;=\operatorname{var}(\bar{X})=\operatorname{var}\left(\frac{1}{n} \sum_{i=1}^{n} X_{i}\right) \\
+ &amp;=\frac{1}{n^{2}} \sum_{i=1}^{n} \operatorname{var}\left(X_{i}\right) \\
+ &amp;=\frac{1}{n^{2}} \sum_{i=1}^{n} \sigma^{2}=\frac{1}{n^{2}} n \sigma^{2}=\frac{\sigma^{2}}{n} \rightarrow 0
+\end{align*}\]</span></p>
+<h3 id="varianz-und-kovarianz-von-ols">Varianz und Kovarianz von OLS</h3>
+<p><span class="math display">\[\begin{align*}
+\operatorname{var}(b_{1}) &amp;=E\left(\left[b_{1}-E\left(b_{1}\right)\right]^{2}\right)=\sigma^{2}\left[\frac{\sum_{i} x_{i}^{2}}{N \sum_{i}\left(x_{i}-\bar{x}\right)^{2}}\right]\\
+\operatorname{var}(b_2) &amp;=\frac{\sigma^{2}}{\sum_{i}\left(x_{i}-\bar{x}\right)^{2}}\\
+\operatorname{cov}\left(b_{1}, b_{2}\right) &amp;=E\left(\left[b_{1}-E\left(b_{1}\right)\right]\left[b_{2}-E\left(b_{2}\right)\right]\right) \\
+&amp;=E\left(\left[b_{1}-\beta_{1}\right]\left[b_{2}-\beta_{2}\right]\right) \\
+&amp; =-\bar{x} E\left(\left[b_{2}-\beta_{2}\right]^{2}\right) \\
+\operatorname{cov}(b_{1}, b_{2}) &amp;= -\bar{x} \operatorname{var}\left(b_{2}\right)
+\end{align*}\]</span></p>
+<h4 id="hereitung-operatornamevarb_2">Hereitung <span class="math inline">\(\operatorname{var}(b_2)\)</span></h4>
+<p><span class="math display">\[\begin{align*}
+b_{2}&amp;=\beta_{2}+\frac{\sum_{i}\left(x_{i}-\bar{x}\right) e_{i}}{\sum_{i}\left(x_{i}-\bar{x}\right)^{2}}\\
+b_2 &amp; = \beta_{2}+\frac{1}{\sum \left(x_{i}-\bar{x}\right)^{2}} \sum\left(x_{i}-\bar{x}\right) e_{i}\\
+\operatorname{var}&amp;  = \operatorname{var}\left(\beta_{2}\right)+\operatorname{var}\left(\frac{1}{\sum (1-\bar{x})^{2}}\sum \left(x_{i}-\bar{x}\right)_{e_{i}}\right)\\
+&amp; = \left(\frac{1}{\sum\left(x_{1}-\bar{x}\right)}^{2}\right)^{2} \operatorname{var}\left(\sum\left(x_{i}-\bar{x}\right) e_{i}\right)\\
+\operatorname{var}\left(b_{2}\right)&amp;=\frac{\sum_{i}\left(x_{i}-\bar{x}\right)^{2} \operatorname{var}\left(e_{i}\right)}{\left(\sum_{i}\left(x_{i}-\bar{x}\right)^{2}\right)^{2}}\\
+\operatorname{var}(b_2) &amp;=\frac{\sigma^{2}}{\sum_{i}\left(x_{i}-\bar{x}\right)^{2}}
+\end{align*}\]</span></p>
+<h4 id="substitutionen-1">Substitutionen:</h4>
+<p><span class="math display">\[\begin{align*}
+\operatorname{var}(ax) &amp;= a^2 \operatorname{var}(x)\\
+\operatorname{var}(a x+b y) &amp;=a^{2} \operatorname{var}(x)+ b^{2} \operatorname{var}(y)+ 2 a b \operatorname{cov}(x, y)\\
+\end{align*}\]</span></p>
+<h3 id="schätzer-hatsigma2">Schätzer <span class="math inline">\(\; \hat{\sigma}^2\)</span></h3>
+<p><span class="math display">\[\begin{align*}
+\sigma^{2} &amp;=\frac{E\left[\sum_{i} \hat{e}_{i}^{2}\right]}{N-2}\\
+\hat{\sigma}^{2} &amp;=\frac{\sum_{i} \hat{e}_{i}^{2}}{N-2}\\
+\hat{\sigma}^{2} &amp;=\frac{\sum_{i} \hat{e}_{i}^{2}}{N-K} \leftarrow \text{für K Parameter}\\
+\\
+\hat{\sigma}&amp;=\sqrt{\frac{\sum_{i} \hat{e}_{i}^{2}}{N-K}}\\
+\end{align*}\]</span></p>
+<h2 id="bestimmtheitsmaß-r2">Bestimmtheitsmaß <span class="math inline">\(R^2\)</span></h2>
+<p><span class="math display">\[R^{2}=\frac{E S S}{T S S}=1-\frac{S S R}{T S S}\]</span></p>
+<h3 id="herleitung">Herleitung</h3>
+<p><span class="math display">\[\begin{align*}
+y_{i}&amp;=\hat{y}_{i}+\hat{e}_{i}\\
+\operatorname{var}(y) &amp;=\operatorname{var}(\hat{y})+\operatorname{var}(\hat{e})+2 \operatorname{cov}(\hat{y}, \hat{e}) \\
+ &amp;=\operatorname{var}(\hat{y})+\operatorname{var}(\hat{e})\\
+\frac{1}{N} \sum_{i=1}^{N}\left(y_{i}-\bar{y}\right)^{2} &amp;=\frac{1}{N} \sum_{i=1}^{N}\left(\hat{y}_{i}-\overline{\hat{y}}\right)^{2}+\frac{1}{N} \sum_{i=1}^{N}\left(\hat{e}_{i}-\overline{\hat{e}}\right)^{2} \\ \underbrace{\sum_{i=1}^{N}\left(y_{i}-\bar{y}\right)^{2}}_{\text {TSS \tiny total sum of squares }} &amp;=\underbrace{\sum_{i=1}^{N}\left(\hat{y}_{i}-\overline{\hat{y}}\right)^{2}}_{\text {ESS \tiny explained sum squared}}+\underbrace{\sum_{i=1}^{N}\left(\hat{e}_{i}-\overline{\hat{e}}\right)^{2}}_{\text {SSR \tiny sum of squard residuals}}
+\end{align*}\]</span></p>
+<h2 id="gauss-markov-theorem">Gauss-Markov-Theorem</h2>
+<blockquote>
+<p>Unter den <a href="#Annahmen">Gauss’schen Annahmen</a> des klassischen lineare Regressionsmodells hat der OLS-Schätzer innerhalb der Klasse aller linearen und erwartungstreuen Schätzfunktionen die leinste Varianz, oder in anderen Worten, er ist BLUE d.h. ein <strong>B</strong>est <strong>L</strong>inear <strong>U</strong>nbiased <strong>E</strong>stimator.</p>
+</blockquote>
+<h2 id="asymptotische-eigenschaften">Asymptotische Eigenschaften</h2>
+<p>Untersuchen das Verhalten von Zufallsvariablen die gegen <span class="math inline">\(\infty ( \approx 150)\)</span> gehen.</p>
+<h3 id="konsistenz">Konsistenz</h3>
+<blockquote>
+<p><span class="math inline">\(b_{N}\)</span> ist eine konsistente Schätzfunktion für <span class="math inline">\(\beta\)</span> wenn gilt: <span class="math display">\[\lim_{N \rightarrow \infty} P\left[\left|b_{N} - \beta\right|&lt;\delta\right]=1 \quad \delta&gt;0\]</span> das heißt, dass die Wahrscheinlichkeit <span class="math inline">\((P)\)</span>, dass mit steigendem Stichprobenumfang der Absolutbetrag der Differenz zwischen <span class="math inline">\(b_{N}\)</span> und <span class="math inline">\(\beta\)</span> kleiner als eine beliebig kleine Zahl <span class="math inline">\(\delta\)</span> wird, gegen <span class="math inline">\(1\)</span> konvergiert.</p>
+</blockquote>
+<h3 id="asymptotische-normalverteilung">Asymptotische Normalverteilung</h3>
+<p>Schätzer aus einer Grundgesamtheit konvergieren bei genügend Stichproben gegen Normalverteilung. Egal, ob die Grundgesamtheit normalverteilt ist oder nicht.</p>
+<h3 id="asymptotische-effizienz">Asymptotische Effizienz</h3>
+<ul>
+<li><span class="math inline">\(b\)</span> sei ein Schätzer für <span class="math inline">\(\beta\)</span>.</li>
+<li>Die Varianz der asymptotischen Verteilung von <span class="math inline">\(b\)</span> heißt asymptotische Varianz von <span class="math inline">\(b\)</span>.</li>
+<li>Wenn <span class="math inline">\(b\)</span> konsistent ist und die asymptotische Varianz kleiner ist als die aller anderen konsistenten Schätzer, dann heißt <span class="math inline">\(b\)</span> asymptotisch effizient.</li>
+</ul>
+<h1 id="intervallschätzung-und-hypothesentests">Intervallschätzung und Hypothesentests</h1>
+<p>Annahmen über die Verteilung des Fehlerterms. Die Annahme 6. der Gauss’schen Annahmen sorgt dafür, dass der OLS Schätzer die kleinste Varianz innerhalb der unverzerrten Schätzer besitzt. Die Annahme ist nicht kritisch, da der Schätzer asymptotisch gegen die Normalverteilung strebt.</p>
+<h2 id="intervalschätzer">Intervalschätzer</h2>
+<h3 id="schritte">Schritte</h3>
+<ol type="1">
+<li>Berechnung des Punktschätzers <span class="math inline">\(b_k\)</span> und eines Schätzers <span class="math inline">\(\hat{\sigma}^2\)</span></li>
+<li>Festlegung von <span class="math inline">\(\alpha\)</span> und bestimmen von <span class="math inline">\(t_{\alpha / 2}^{c}\)</span> mit <span class="math inline">\(N-K\)</span> Freiheitsgraden</li>
+<li>Berechnung des Intervalschätzers <span class="math display">\[P\left[b_{k}-t_{\alpha / 2}^{c} \hat{\sigma}_{b_{k}} \leq \beta_{k} \leq b_{k}+t_{\alpha / 2}^{c} \hat{\sigma}_{b_{k}}\right]=1-\alpha\]</span></li>
+<li>Interpretation des Intervalschätzers: <span class="math inline">\((1-\alpha) \times 100 \%\)</span> der Konfidenzintervalle enthalten <span class="math inline">\(\beta\)</span></li>
+</ol>
+<h5 id="konfidenzintervalle-sind-enger-wenn">Konfidenzintervalle sind enger wenn:</h5>
+<ul>
+<li>je größer <span class="math inline">\(\alpha\)</span></li>
+<li>je kleiner <span class="math inline">\(\sigma^2\)</span></li>
+<li>je größer <span class="math inline">\(N\)</span></li>
+</ul>
+<h4 id="standardfehler">Standardfehler</h4>
+<p><span class="math display">\[\begin{align*}
+\operatorname{var}\left(e_{i}\right)&amp; \equiv \sigma^{2}\\
+\operatorname{var}\left(b_{2}\right)&amp;=\sigma_{b_{2}}^{2}=\sigma^{2} / \sum_{i}\left(x_{i}-\bar{x}\right)^{2}
+\end{align*}\]</span></p>
+<dl>
+<dt>Punktschätzer</dt>
+<dd>dienen zur Schätzung eines unbekannten Parameters einer Grundgesamtheit auf grundlage einer Einyelnen Stichprobe. Vermitteln allerdings keine Informationen über die Unsicherheit.
+</dd>
+</dl>
+<h3 id="normalverteilung">Normalverteilung</h3>
+<p><span class="math display">\[\begin{align*}
+P &amp; [z \leq-1.96]=P[z \geqslant+1,96]=0.025\\
+P &amp; [-1.96 \leq z \leq+1.96]=1-0.05=0.95\\
+P &amp; \left[-1.96 \leq \frac{b_{k}-\beta_{k}}{\sigma_{b_{k}}} \leq+1.96\right]=0.95\\
+P &amp; \left[-z_{\alpha / 2} \leq \frac{b_{k}-\beta_{k}}{\sigma_{b_{k}}} \leq+z_{\alpha / 2}\right]=1-\alpha\\
+\end{align*}\]</span></p>
+<h3 id="t-verteilung">T-Verteilung</h3>
+<blockquote>
+<p>Der Wert der ausgegenenen t-Statistik ist einfach Koeffizient dividiert durch Stadardfehler: <span class="math display">\[t-Stat(b_k) = \frac{b_k}{\hat{\sigma}}_{b_k}\]</span></p>
+</blockquote>
+<p><span class="math display">\[\begin{align*}
+P &amp; \left[-t_{\alpha / 2}^{c} \leq \frac{b_{k}-\beta_{k}}{\hat{\sigma}_{b_{k}}} \leq+t_{\alpha / 2}^{c}\right]=1-\alpha\\
+P &amp; \left[b_{k}-t_{\alpha / 2}^{c} \hat{\sigma}_{b_{k}} \leq \beta_{k} \leq b_{k}+t_{\alpha / 2}^{c} \hat{\sigma}_{b_{k}}\right]=1-\alpha
+\end{align*}\]</span></p>
+<p><span class="math display">\[\begin{align*}
+H_{0}: \mu &amp; =    \mu_0, \quad H_{1}: \mu \neq \mu_0 \\
+H_{0}: \mu &amp; \geq \mu_0, \quad H_{1}: \mu &lt;    \mu_0 \\
+H_{0}: \mu &amp; \leq \mu_0, \quad H_{1}: \mu &gt;    \mu_0 \\
+\end{align*}\]</span></p>
+<h2 id="einfache-hypothesentests">Einfache Hypothesentests</h2>
+<ol type="1">
+<li>Ausgangssituation: Formuliere die Annahmen und nicht zu testenden Hintergrundhypothesen (z.B. b ist normalverteilt mit …)</li>
+<li>Formuliere die Alternativ- und Nullhypothese z.B. <span class="math inline">\(H_{1}: \beta = 0, H_{0}: \beta=0\)</span></li>
+<li>Wähle die Teststatistik (z.B. t-Stat <span class="math inline">\(=b / \hat{\sigma}_{b})\)</span></li>
+<li>Bestimme die Verteilung der Teststatistik unter der Annahme, dass die Nullhypothese gilt z.B. <span class="math inline">\(b / \hat{\sigma}_{b} \sim t_{N-2}\)</span>.</li>
+<li>Wähle das Signifikanzniveau und bestimme den Annahme- und Verwerfungsbereich (z.B. behalte die Nullhypothese wenn <span class="math inline">\(-1.96 \leq b / \hat{\sigma}_{b} \leq+1.96\)</span> ; anderenfalls verwirf die Nullhypothese).</li>
+</ol>
+<h2 id="zweiseitige-hypothesentests">Zweiseitige Hypothesentests</h2>
+<p><span class="math display">\[\begin{align*}
+P&amp;\left[\beta^{0}-t_{\alpha / 2}^{c} \hat{\sigma}_{b} \leqslant b \leqslant \beta^{0}+t_{\alpha / 2}^{c} \hat{\sigma}_{b}\right]=1-\alpha\\
+&amp;\left[\beta^{0}-t_{\alpha / 2}^{c} \hat{\sigma}_{b} ; \beta^{0}+t_{\alpha / 2}^{c} \hat{\sigma}_{b}\right]
+\end{align*}\]</span></p>
+<h2 id="fehlerarten">Fehlerarten</h2>
+<ol type="1">
+<li>Fehler 1. Art: Nullhypothese wird fälschlicherweise Verworfen</li>
+<li>Fehler 2. Art: Nullhypothese wird fälschlicherweise Aktzeptiert</li>
+</ol>
+<h1 id="logarithmen">Logarithmen</h1>
+<p><span class="math display">\[\begin{align*}
+y&amp;=a \cdot x^{\beta_{2}} \cdot v\\
+\log (y)&amp;=\log \left(a \cdot x^{\beta_{2}} \cdot v\right)=\underbrace{\log (a)}_{\beta_{1}}+\beta_{2} \cdot \log (x)+\underbrace{\log (v)}_{u} \\
+\Rightarrow \log (y)&amp;=\beta_{1}+\beta_{2} \log (x)+u\\
+\\
+\frac{\partial y}{\partial x}&amp;=\beta_{2} \frac{y}{x} \quad \Leftrightarrow \quad \beta_{2}=\frac{\partial y}{\partial x} \frac{x}{y}\\
+\end{align*}\]</span></p>
+<p><span class="math display">\[
+\begin{array}{lllrl}
+\text { Level-level } &amp; y        &amp; x        &amp; \Delta    y= &amp; \beta_{2} \Delta x \\
+\text { Level-log }   &amp; y        &amp; \log (x) &amp; \Delta    y= &amp; \left(\beta_{2} / 100\right) \% \Delta x \\
+\text { Log-level }   &amp; \log (y) &amp; x        &amp; \% \Delta y= &amp; \left(100 \beta_{2}\right) \Delta x \\
+\text { Log-log }     &amp; \log (y) &amp; \log (x) &amp; \% \Delta y= &amp; \beta_{2} \% \Delta x
+\end{array}\]</span></p>
+<h1 id="multivariates-modell">Multivariates Modell</h1>
+<p>Die Annahme, dass alle Variablen gleich und unabhängig Verteilt sind ist bei realen Daten oft nicht gegeben. Variablen können sich statistisch beeinflussen, ohne das ein kausaler Zusammenhang besteht.</p>
+<h2 id="heteroskedastizität">Heteroskedastizität</h2>
+<blockquote>
+<p>Ungleiche Varianz der Störterme.</p>
+</blockquote>
+<p>Die Varianz der einzelnen Fehlerterme ist definiert als: <span class="math display">\[\operatorname{var}(e_i) = \sigma_i^2\]</span></p>
+<p>Die Annahmen <span class="math inline">\(e_i \sim iid(0,\sigma_i^2), \quad E(e_i)=0 \quad \text{und} \quad \operatorname{cov}(e_i,e_j) = 0 \:\)</span> gelten weiterhin.</p>
+<p>Der OLS-Schätzer bleibt erwartungstreu und konsitent.</p>
+<h3 id="maßnahmen-gegen-heteroskedastizität">Maßnahmen gegen Heteroskedastizität</h3>
+<ul>
+<li>Heteroskedastiekonsistente Standardfehler
+<ul>
+<li><span class="math inline">\(\displaystyle \operatorname{var}(b_2) = \sum_i^N \frac{(x_i-\bar{x})^2 \sigma_i^2}{\left(\sum_i^N ( x_i- \bar{x})^2\right)^2}\)</span></li>
+</ul></li>
+<li>weighted - generalized Least Squares (WLS and GLS)</li>
+</ul>
+<!--
+### Regression auf Konstante
+
+\begin{align*}
+y &=\beta_{1}+u\\
+\beta_0 &= \bar{y}
+\end{align*}
+
+### Regression ohne Konstante
+$$y=\beta_{2} x+u$$
+
+
+### Multiple Regression
+$$y=\beta_{1}+\beta_{2} x_{2}+\beta_{2} x_{2}+\cdots+\beta_{k} x_{k}+u$$
+$$\underset{1 \times(k+1)}{\mathbf{x}_{i}}=\left[\begin{array}{lllll}1 & x_{i 1} & x_{i 2} & \ldots & x_{i k}\end{array}\right], \quad \underset{(k+1) \times 1}{\boldsymbol{\beta}}=\left[\begin{array}{c}\beta_{1} \\ \beta_{2} \\ \vdots \\ \beta_{k}\end{array}\right]$$
+
+
+
+$$y_{i}=\vec{x}_{i} \vec{\beta}+u_{i}$$
+
+\begin{align*}
+\mathbf{y}_{n \times 1}&=\left[\begin{array}{c}y_{2} \\ y_{2} \\ \vdots \\ y_{n}\end{array}\right], \quad \underset{n \times 1}{\mathbf{u}}=\left[\begin{array}{c}u_{2} \\ u_{2} \\ \vdots \\ u_{n}\end{array}\right] \\ 
+\underset{n \times(k+1)}{\mathbf{X}}&=\left[\begin{array}{c}\mathbf{x}_{2} \\ \mathbf{x}_{2} \\ \vdots \\ \mathbf{x}_{n}\end{array}\right]=\left[\begin{array}{cccc}1 & x_{11} & \cdots & x_{1 k} \\ 1 & x_{21} & \cdots & x_{2 k} \\ \vdots & \vdots & \ddots & \vdots \\ 1 & x_{n 1} & \cdots & x_{n k}\end{array}\right]
+\end{align*}
+\begin{align*}
+\underset{n \times 1}{\mathbf{y}}&=\underbrace{\mathbf{X} \boldsymbol{\beta}}_{n \times 1}+\underset{n \times 1}{\mathbf{u}}\\
+\hat{\boldsymbol{\beta}}&=\left(\mathbf{X}^{\prime} \mathbf{X}\right)^{-1} \mathbf{X}^{\prime} \mathbf{y}
+\end{align*}
+-->
+<section class="footnotes" role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1" role="doc-endnote"><p>Impliziert das eine unabhängige und identische Verteilung vorliegt (independet and identical distribution (iid)). Bei beobachteten Daten ist diese Annahme sehr Kritisch. Hier lässt sich nicht sicherstellen das der datangenerierende Prozess wirklich zufällig ist.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+</body>
+</html>

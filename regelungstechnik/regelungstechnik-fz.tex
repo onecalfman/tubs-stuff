@@ -1,0 +1,873 @@
+\documentclass{article}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{tikz}
+\usepackage{float}
+\usetikzlibrary{arrows,decorations.markings}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.misc}
+\usetikzlibrary{intersections}
+\usetikzlibrary{positioning}
+\usetikzlibrary{patterns}
+\usetikzlibrary{circuits.logic.US,circuits.logic.IEC,fit}
+\newcommand\addvmargin[1]{
+\node[fit=(current bounding box),inner ysep=#1,inner xsep=0]{};
+}
+\usepackage{pgfplots}
+\usepgflibrary{patterns}
+\usepackage[T1]{fontenc}
+\usepackage{bodegraph}
+\usepackage{mathptmx}
+\usepackage{CrimsonPro}
+\usepackage{multirow}
+\usepackage{textcomp}
+\usepackage{multicol}
+\usepackage{makecell}
+\usepackage{changepage}
+\usepackage{booktabs,multirow,array}
+\usepackage{colortbl}
+\usepackage{xcolor}
+\usepackage[makeroom]{cancel}
+\usepackage{lscape}
+\usepackage{enumitem}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+ \geometry{
+	 a3paper,
+	 left=5mm,
+	 right=5mm,
+	 top=5mm,
+	 bottom=8mm,
+	 }
+\usepackage{hyperref}
+\newcommand{\thicc}{thick}
+\newcommand{\ultraskip}{\bigskip\bigskip\bigskip\bigskip\bigskip\bigskip}
+\newcommand{\tabellenskalierung}{0.75}
+\newcommand{\PreserveBackslash}[1]{\let\temp=\\#1\let\\=\temp}
+\newcolumntype{C}[1]{>{\PreserveBackslash\centering}p{#1}}
+\newcolumntype{R}[1]{>{\PreserveBackslash\raggedleft}p{#1}}
+\newcolumntype{L}[1]{>{\PreserveBackslash\raggedright}p{#1}}
+
+%\tikzset{cross/.style={cross out, draw=blue!80, minimum size=8*(#1-\pgflinewidth), inner sep=0pt, outer sep=0pt,cross/.default={5pt}}}
+%\tikzset{ cross/.pic = { \draw[rotate = 45] (-#1,0) -- (#1,0); \draw[rotate = 45] (0,-#1) -- (0, #1); } }
+\tikzset{pol/.style={path picture={ \draw[blue]
+	(path picture bounding box.south east) -- (path picture bounding box.north west)
+	(path picture bounding box.south west) -- (path picture bounding box.north east);
+	}}}
+\newcounter{tempcolnum}
+\makeatletter
+\newcommand{\multicolinterrupt}[1]{% Stuff to span both rows
+	\setcounter{tempcolnum}{\col@number}\end{multicols}
+	#1%
+	\begin{multicols}{\value{tempcolnum}}
+}
+\makeatother
+
+
+
+\tikzset{
+block/.style = {draw, fill=white, rectangle, minimum height=3em, minimum width=3em},
+tmp/.style  = {coordinate}, 
+sum/.style= {draw, fill=white, circle, node distance=1cm},
+input/.style = {coordinate},
+output/.style= {coordinate},
+pinstyle/.style = {pin edge={to-,thin,black} }, 
+gnuplot def/.append style={prefix={}},  % Grid Style
+semilog lines/.style={gray},
+semilog lines 2/.style={red,dotted}
+semilog half lines/.style={gray, dotted},
+semilog label x/.style={below,font=\tiny},
+semilog label y/.style={above,font=\tiny}  % Magnitude Plot 
+}
+
+
+\title{Regelungstechnik Formelsammlung}
+\author{Jonas Walkling}
+
+\begin{document}
+
+\begin{landscape}
+\begin{multicols}{2}
+
+
+\begin{figure}[H]
+\begin{adjustwidth}{-3mm}{}
+
+\begin{tabular}{L{4mm}|l|l|llll}
+P &
+          \begin{tikzpicture}[thick] \draw[<->] (0,1) |- (1.5,0); \draw[red!80] (0,0) |- (1.4,0.7); \end{tikzpicture} &
+		  \begin{tikzpicture}
+			  \node (a) {$\displaystyle y(t) = K  u(t), \quad A(i\omega) = K$};
+			  \node [below=-1mm of a]  {$\displaystyle G=K, \quad \varphi(\omega) = 0$};
+		  \end{tikzpicture}
+			   &
+				    \begin{tikzpicture}[thick]
+					    \draw[->] (0,-0.7) -- (0,0.7) node[right] {$\Im$};
+					    \draw[->] (-0.7,0) -- (0.7,0) node[below] {$\Re$};
+				    \end{tikzpicture}
+				    &
+				    \begin{tikzpicture}[thick]
+					    \draw[->] (0,-0.7) -- (0,0.7) node[right] {$\Im$};
+					    \draw[->] (-0.7,0) -- (0.7,0) node[below] {$\Re$};
+					    \draw (0.4,0) node[draw,circle, scale=0.4, fill, blue] {};
+				    \end{tikzpicture}
+				    &
+\begin{tikzpicture}[ gnuplot def/.append style={prefix={}}, ] % Grid Style
+\tikzset{ semilog lines/.style={black},
+semilog lines 2/.style={gray,dotted},
+semilog half lines/.style={gray, dotted},
+semilog label x/.style={below,font=\tiny},
+semilog label y/.style={above,font=\tiny} } % Magnitude Plot 
+
+\begin{scope}[xscale=40/100, yscale=2/100] 
+	\UnitedB \semilog{-2}{3}{-30}{20} % xi=0.1 
+	\BodeGraph[blue!80,samples=500]{-2:3}{\POAmp{6}{0}} % P Glied
+\end{scope} 
+
+\begin{scope}[xshift=3cm,xscale=30/100,yscale=3/220] 
+	\UniteDegre 
+	\OrdBode{30} 
+	\semilog{-2}{3}{-30}{30} % xi=0.1 
+	\BodeGraph[blue!80,samples=500]{-2:3}{\POArg{4}{0}} % xi=0.5 
+\end{scope} 
+\end{tikzpicture}
+
+    \\ \hline
+I &
+           \begin{tikzpicture}[thick] \draw[<->] (0,1) |- (1.5,0); \draw[red!80] (0,0) -- (1.4,0.7); \end{tikzpicture} &
+		   \begin{tikzpicture}
+			   \node (a) {$y(t) = K_I \int_{0}^{t} u(t)dt, \quad A(i\omega) = \frac{1}{T_N \omega}$};
+			   \node [below=-1mm of a] {$G=\frac{K_{I}}{s}, \quad \varphi(\omega)= -\frac{\pi}{2}$};
+		   \end{tikzpicture}
+		   &
+				    \begin{tikzpicture}[thick]
+					    \draw[->] (0,-0.7) -- (0,0.7) node[right] {$\Im$};
+					    \draw[->] (-0.7,0) -- (0.7,0) node[below] {$\Re$};
+					    \draw (0,0) node[pol] {};
+				    \end{tikzpicture}
+				    &
+				    \begin{tikzpicture}[thick]
+					    \draw[->] (0,-0.7) -- (0,0.7) node[right] {$\Im$};
+					    \draw[->] (-0.7,0) -- (0.7,0) node[below] {$\Re$};
+					    \draw[very thick, blue] (0,-0.7) -- node[right=-1mm, black] {$\uparrow \omega$} (0,0);
+				    \end{tikzpicture}
+				    &
+\begin{tikzpicture}[ gnuplot def/.append style={prefix={}}, ] % Grid Style
+\tikzset{ semilog lines/.style={black},
+semilog lines 2/.style={gray,dotted},
+semilog half lines/.style={gray, dotted},
+semilog label x/.style={below,font=\tiny},
+semilog label y/.style={above,font=\tiny} } % Magnitude Plot 
+
+\begin{scope}[xscale=40/100, yscale=2/100] 
+	\UnitedB \semilog{-2}{3}{-30}{20} % xi=0.1 
+	\BodeGraph[blue!80,samples=500]{-1:1.5}{\IntAmp{1}} % P Glied
+\end{scope} 
+
+\begin{scope}[yshift=11mm, xshift=3cm,xscale=30/100,yscale=3/220] 
+	\UniteDegre 
+	\OrdBode{30} 
+	\semilog{-2}{3}{-120}{-60} % xi=0.1 
+	\BodeGraph[blue!80,samples=500]{-2:3}{\IntArg{1}} % xi=0.5 
+\end{scope} 
+\end{tikzpicture}
+\\ \hline
+D &
+           \begin{tikzpicture}[thick] \draw[<->] (0,1) |- (1.5,0); \draw[red!80] (0,0.7) |- (1.4,0); \end{tikzpicture} &
+		   \begin{tikzpicture}
+			   \node (a) {$\displaystyle y(t) = K u'(t), \quad A(i\omega) = T_V \omega$};
+			   \node [below=-1mm of a] {$\displaystyle G=sT_v, \quad \varphi(\omega) = \frac{\pi}{2}$};
+		   \end{tikzpicture}
+		   &
+				    \begin{tikzpicture}[thick]
+					    \draw[->] (0,-0.7) -- (0,0.7) node[right] {$\Im$};
+					    \draw[->] (-0.7,0) -- (0.7,0) node[below] {$\Re$};
+					    \draw (0,0) node [draw, red, circle] {};
+				    \end{tikzpicture}
+				    &
+				    \begin{tikzpicture}[thick]
+					    \draw[->] (0,-0.7) -- (0,0.7) node[right] {$\Im$};
+					    \draw[->] (-0.7,0) -- (0.7,0) node[below] {$\Re$};
+					    \draw[very thick, blue] (0,0.7) -- node[right=-1mm, black] {$\uparrow \omega$} (0,0);
+				    \end{tikzpicture}
+				    &
+\begin{tikzpicture}[ gnuplot def/.append style={prefix={}}, ] % Grid Style
+\tikzset{ semilog lines/.style={black},
+semilog lines 2/.style={gray,dotted},
+semilog half lines/.style={gray, dotted},
+semilog label x/.style={below,font=\tiny},
+semilog label y/.style={above,font=\tiny} } % Magnitude Plot 
+
+\begin{scope}[xscale=40/100, yscale=2/100] 
+	\UnitedB \semilog{-2}{3}{-30}{20} % xi=0.1 
+	\BodeGraph[blue!80,samples=500]{-1.5:1}{\DifAmp{1}} % D Glied
+\end{scope} 
+
+\begin{scope}[yshift=-14mm, xshift=3cm,xscale=30/100,yscale=3/220] 
+	\UniteDegre 
+	\OrdBode{30} 
+	\semilog{-2}{3}{60}{120} % xi=0.1 
+	\BodeGraph[blue!80,samples=500]{-2:3}{\DifArg{1}} % D Glied
+\end{scope} 
+\end{tikzpicture}
+\\ \hline
+PT$_1$ &
+      \begin{tikzpicture}[thick] \draw[<->] (0,1) |- (1.5,0); \draw[red!80] (0,0) to[bend left=30] (1.4,0.7);
+	      \draw[densely dashed] (0,0) -- (0.5,0.7);
+	\draw[<->,dashed] (0,0.7) -- node[above] {T} (0.5,0.7);
+	\draw[dashed] (0,0.7) -- (1.4,0.7);
+	\end{tikzpicture} &
+	      \begin{tikzpicture}
+		      \node (a) {$\displaystyle T y' + y = K u(t), \quad A(i\omega) = \frac{K}{\sqrt{1+(T_N \omega)}}$};
+			\node [below=-1mm of a] {$G=\frac{K_{P}}{1+Ts}, \quad \varphi(\omega) = -\arctan(\omega T)$};
+	      \end{tikzpicture}
+	      &
+				    \begin{tikzpicture}[thick]
+					    \draw[->] (0,-0.7) -- (0,0.7) node[right] {$\Im$};
+					    \draw[->] (-0.7,0) -- (0.7,0) node[below] {$\Re$};
+					    \draw (-0.4,0) node[pol] {} node[below] {$-\frac{1}{T_1}$};
+				    \end{tikzpicture}
+				    &
+				    \begin{tikzpicture}[thick]
+					    \draw[->] (0,-0.7) -- (0,0.7) node[right] {$\Im$};
+					    \draw[->] (-0.2,0) -- (1.2,0) node[above] {$\Re$} node[below] {$K$};
+					    \clip (0,-0.7) rectangle (1.2,0);
+					    \draw[blue, very thick] (0.5,0) circle(0.5) node[black, below=3.5mm] {$\leftarrow$ $\omega$};
+
+				    \end{tikzpicture}
+				    &
+\begin{tikzpicture}[ gnuplot def/.append style={prefix={}}, ] % Grid Style
+\tikzset{ semilog lines/.style={black},
+semilog lines 2/.style={gray,dotted},
+semilog half lines/.style={gray, dotted},
+semilog label x/.style={below,font=\tiny},
+semilog label y/.style={above,font=\tiny} } % Magnitude Plot 
+
+\begin{scope}[xscale=40/100, yscale=2/100] 
+	\UnitedB \semilog{-2}{3}{-30}{20} % xi=0.1 
+	\BodeGraph[blue!80,dotted]{-2:2.5}{\POAmp{1}{0.1}} % PT1 Glied
+	\BodeGraph[blue!80, samples=500]{-2:2.5}{\POAmpAsymp{1}{0.1}} % PT1 Glied
+	\node[xshift=4mm, yshift=5.4mm] (a) {$1/T_1$};
+	\node[xshift=4mm, yshift=-1mm] (b) {};
+	\draw[thick, orange!80] (a) to (b);
+\end{scope} 
+
+\begin{scope}[yshift=4mm, xshift=3cm,xscale=30/100,yscale=3/220] 
+	\UniteDegre 
+	\OrdBode{30} 
+	\semilog{-2}{3}{-90}{0} % xi=0.1 
+	\BodeGraph[blue!80,samples=500]{-2:3}{\POArgAsymp{1}{0.1}} % P Glied
+	\BodeGraph[blue!80, dotted, samples=500]{-2:3}{\POArg{1}{0.1}} % P Glied
+\end{scope} 
+\end{tikzpicture}
+\\ \hline
+PT$_2$ &
+     \begin{tikzpicture}[thick] \draw[<->] (0,1) |- (1.5,0); \begin{axis}[scale=0.18,domain=0:5,samples=501,axis lines=none, xlabel={}, ylabel={}] \addplot[color=red!80,no marks,thick,smooth] {(1-exp(-x)*cos(10*deg(x)*0.5))}; \end{axis} \end{tikzpicture}  &
+	      \begin{tikzpicture}
+		      \node (a) { $\frac{y''}{\omega_{0}^{2}} \small{+}  \frac{2 Dy'}{\omega_{0}} \small{+} y = K u(t) $};
+			\node [below=-1mm of a] (b) {$G=K_{P}/(1+\frac{2 D}{\omega_{0}} s+\frac{1}{\omega_{0}^{2}} s^{2})$};
+			\node [below of=b] (c) {$A(i \omega) =\frac{K}{\sqrt{\left(1-\left(T_1\right)^{2}\right)^{2}+\left(2 \cdot D T_2\right)^{2}}}$};
+			\node [below of=c] {$\varphi(\omega)=-\arctan \left(\frac{2 \cdot D \frac{\omega}{\omega_{0}}}{1-\left(\frac{\omega}{\omega_{0}}\right)^{2}}\right)$};
+
+	      \end{tikzpicture}
+	      &
+				    \begin{tikzpicture}[thick]
+					    \draw[->] (0,-0.7) -- (0,0.7) node[right] {$\Im$};
+					    \draw[->] (-0.7,0) -- (0.7,0) node[below] {$\Re$};
+					    \draw (-0.3,0.3) node[pol] {} node[above, rotate=45] {$\rightarrow$};
+					    \draw (-0.3,-0.3) node[pol] {} node[below=0.5mm, rotate=-45] {$\rightarrow$};
+					    \draw[thin] (0,0) circle (0.425); 
+				    \end{tikzpicture}
+				    &
+				    \begin{tikzpicture}[thick]
+					    \draw[->] (0,-0.7) -- (0,0.7) node[right] {$\Im$};
+					    \draw[->] (-0.7,0) -- (0.7,0) node[above] {$\Re$};
+					    \draw[very thick, blue] (0.55,0) to[bend left=50] (-0.1,-0.4) to[bend left=70] (0,0);
+				    \end{tikzpicture}
+				    &
+\begin{tikzpicture}[ gnuplot def/.append style={prefix={}}, ] % Grid Style
+\tikzset{ semilog lines/.style={black},
+semilog lines 2/.style={gray,dotted},
+semilog half lines/.style={gray, dotted},
+semilog label x/.style={below,font=\tiny},
+semilog label y/.style={above,font=\tiny} } % Magnitude Plot 
+
+\begin{scope}[xscale=40/100, yscale=2/100] 
+	\UnitedB \semilog{-2}{3}{-30}{20} % xi=0.1 
+	\BodeGraph[violet]{-2:1.75}{\SOAmp{1}{1.5}{10}} % PT2 Glied
+	\BodeGraph[purple]{-2:1.75}{\SOAmp{1}{0.1}{10}} % PT2 Glied
+	\BodeGraph[blue]{-2:1.75}{\SOAmpAsymp{1}{1}{10}} % PT2 Glied
+	\node[xshift=4mm, yshift=5.4mm] (a) {$\omega_0$};
+	\node[xshift=4mm, yshift=-1mm] (b) {};
+	\draw[very thick, green!80] (a) to (b);
+\end{scope} 
+
+\begin{scope}[yshift=4mm, xshift=3cm,xscale=30/100,yscale=3/440] 
+	\UniteDegre 
+	\OrdBode{30} 
+	\semilog{-2}{3}{-180}{0} % xi=0.1 
+	\BodeGraph[violet]{-2:3}{\SOArg{1}{1.5}{10}} % PT2 Glied
+	\BodeGraph[purple]{-2:3}{\SOArg{1}{0.1}{10}} % PT2 Glied
+	\BodeGraph[blue]{-2:3}{\SOArgAsymp{1}{1}{10}} % PT2 Glied
+\end{scope} 
+\end{tikzpicture}
+\\ \hline
+PT$_t$ &
+       \begin{tikzpicture}[thick] \draw[<->] (0,1) |- (1.5,0); \draw[red!80] (0,0) -| (0.7,0.7); \draw[red!80] (0.7,0.7) -- (1.4,0.7); \end{tikzpicture}                                                                  &
+	      \begin{tikzpicture}
+		      \node (a) {$y(t) = Ku(t-T_t), \quad A(i\omega)=K $};
+			\node [below=-1mm of a] {$G=Ke^{-sT_t}, \quad \varphi(\omega)=-\omega \cdot T_{t} $};
+	      \end{tikzpicture}
+	      &
+				    \begin{tikzpicture}[thick]
+					    \draw[->] (0,-0.7) -- (0,0.7) node[right] {$\Im$};
+					    \draw[->] (-0.7,0) -- (0.7,0) node[below] {$\Re$};
+				    \end{tikzpicture}
+				    &
+				    \begin{tikzpicture}[thick]
+					    \draw[->] (0,-0.7) -- (0,0.7) node[right] {$\Im$};
+					    \draw[->] (-0.7,0) -- (0.7,0) node[below] {$\Re$};
+					    \draw[very thick, blue] (0,0) circle (0.5);
+				    \end{tikzpicture}
+	\\ \hline
+PID  &
+      \begin{tikzpicture}[thick] \draw[<->] (0,1) |- (1.5,0); \draw[red!80] (0,0) -- (0,0.8); \draw[red!80] (0,0.3) -- (1.4,0.7); \end{tikzpicture} &
+	      \begin{tikzpicture}
+		      \node (a) {\small $y = K \left(u(t) + T_V u'(t) + \frac{1}{T_N}\int_{0}^{t} u(t)dt\right)$};
+			\node [below=-1mm of a] (b) {$G=K_{P}\left[1+\frac{1}{T_{N} s}+T_{V} s\right]u(t)\; dt$};
+			\node [below of=b] (c) {$A(i\omega) =\frac{K_{R}}{\omega  T_{N}} \sqrt{\left(1+\left(\omega \cdot T_{N}\right)^{2}\left(1+\left(\omega \cdot T_{V}\right)^{2}\right)\right)}$};
+			\node [below of=c] {$\varphi(\omega)=-\arctan \left(\frac{1-\omega^{2} \cdot T_{N} \cdot T_{V}}{\omega\left(T_{N}+T_{V}\right)}\right)$};
+
+	      \end{tikzpicture}
+	      &
+				    \begin{tikzpicture}[thick]
+					    \draw[->] (0,-0.7) -- (0,0.7) node[right] {$\Im$};
+					    \draw[->] (-1.1,0) -- (0.3,0) node[below] {$\Re$};
+					    \draw (-0.8,0) node[circle, red, draw] {};
+					    \draw (-0.4,0) node[circle, red, draw] {};
+					    \draw (0,0) node[pol] {};
+				    \end{tikzpicture}
+				    &
+				    \begin{tikzpicture}[thick]
+					    \draw[->] (0,-0.7) -- (0,0.7) node[right] {$\Im$};
+					    \draw[->] (-0.7,0) -- (0.7,0) node[below] {$\Re$};
+					    \draw[very thick, blue] (0,-0.7) -- (0,0.7);
+				    \end{tikzpicture}
+				    &
+%\begin{tikzpicture}[auto, node distance=2cm,>=latex', node distance=1.9cm]
+%	\node [input, name=in] (in) {};
+%	\node [sum, right of=in] (s1) {};
+%	\node [block, right=0.4cm of s1 ] (g1) {$G_1(s)$};
+%	\node [block, right of=g1 ] (g2) {$G_2(s)$};
+%	\node [sum, right of=g2] (s2) {};
+%	\node [output, name=out, right of=s2] (out) {};
+%
+%	\node [tmp, below=0.8cm of s1] (tmp1) {};
+%
+%	\draw [->] (in) -- node{$U(s)$} (s1);
+%	\draw [->] (s1) -- (g1);
+%	\draw [->] (g1) -- (g2);
+%	\draw [->] (g2) -- node[name=y] {$Y(s)$} (out);
+%	\draw [->] (y) |- (tmp1) -- node[pos=0.8, left] {$\pm$} (s1.south);
+%	
+%	\node[below of=g1] {$G(s) = \frac{G_1(s)G_2(s)}{(1\mp G_2(s)G2(s))}$};
+%\end{tikzpicture}
+
+
+  \\ \hline
+	
+\end{tabular}
+\end{adjustwidth}
+\end{figure}
+
+\begin{multicols}{2}
+\begin{multicols}{2}
+	\small
+
+\paragraph*{Linearisieren}
+\begin{equation*}
+	h(x) = h(x_0) + \frac{\partial h(x_0)}{\partial x} (x-x_0)
+\end{equation*}
+
+\paragraph*{Ableitungssatz}
+\begin{align*}
+	\mathcal{L}\{y(t)\} &=Y(s) \\
+	\mathcal{L}\left\{y^{\prime}(t)\right\} &=s \cdot Y(s)-y(0)  \\
+	\mathcal{L}\left\{y^{\prime \prime}(t)\right\}&=s^{2} \cdot Y(s)-s y(0)-y^{\prime}(0) \\
+\end{align*}
+
+\paragraph*{Partialbruchzerlegung}
+\begin{align*}
+	(s+1) &\rightarrow \frac{A}{s+1} \\ 
+	(s+1)^2 &\rightarrow \frac{A}{s+1} + \frac{B}{(s+1)^2} \\
+	(s^2+1) &\rightarrow \frac{As+B}{s^2+1}
+\end{align*}
+
+\paragraph{System-/Sprungantwort}
+	\begin{align*}
+		Y(s) & =G(s) \cdot U(s) \\
+		\mathcal{L}^{-1}(Y(s)) &= \mathcal{L}^{-1}(G(s)U(s)) \\
+		\text{mit: } U(s) &= \frac{1}{s}F_{\text{ext}} \leftarrow \text{Einheitssprung} 
+	\end{align*}
+\paragraph{Frequenzgang}
+	\begin{align*}
+		G(s) & =G(i\omega) = |G(i\omega)| \cdot e^{i\varphi(i\omega)} \\
+		%G(s) & =G(i\omega) = |G(i\omega)| \cdot e^{i\arctan\frac{\Im}{\Re}} \\
+		|G(i\omega)| &= \sqrt{\Re^2 + \Im^2} = A(i\omega)\\
+		|G(i\omega_d)| &=1 \leftarrow \text{Durchtrittsfrequenz} \\
+		%\varphi(i\omega) &= \arctan \left(\frac{\Im}{\Re}\right) \\
+		%G(i\omega) &= A(i\omega) \cdot e^{-i \varphi(i\omega)} \\
+		A_R &= \frac{1}{|G_0(i\omega_\pi)|} \\
+		\varphi_0(i\omega_d) &= \alpha_R - \pi \\
+		\varphi_0(\omega_\pi) &= -\pi \\
+		\alpha_R &= \varphi_0(\omega_d)+\pi \\
+	\end{align*}
+
+
+\paragraph{Führungs- Störungsübertragungsfunktion Z=$0$ / W=$0$}
+	\begin{align*}
+		G_W &= \frac{Y(s)}{W(s)} = \frac{G_SG_R}{(1+G_SG_R)} \\
+		G_{Z} &=\frac{Y(s)}{Z(s)} =\frac{G_{S}G_Z}{\left(1+G_{S} G_{R}\right)}
+\end{align*}
+\begin{tikzpicture}[auto, node distance=2cm,>=latex', node distance=1.9cm]
+	\node [input, name=in] (in) {};
+	\node [sum, right of=in] (s1) {};
+	\node [block, right=0.4cm of s1 ] (g1) {$G_1(s)$};
+	\node [block, below=1mm of g1 ] (g2) {$G_2(s)$};
+	\node [output, name=out, right of=g1] (out) {};
+
+	\draw [->] (in) -- node{$U(s)$} (s1);
+	\draw [->] (s1) -- (g1);
+	\draw [->] (g1) -- node[name=y] {$Y(s)$} (out);
+	\draw [->] (y) |- (g2) -| (s1);
+	\draw (s1) node[below left] {$\pm$};
+	
+	\node[below=1mm of g2] {$G(s) = \frac{G_1(s)}{(1\mp G_2(s)G2(s))}$};
+\end{tikzpicture}
+
+\subsection*{Stabilitätsuntersuchung}
+
+\subsubsection*{Pole und Nullstellen}
+Gleichung auf Form bringen:
+	\begin{align*}
+		1. &\quad  G(s) = k \frac{s-s_0}{(s-s_1)(s-s_2)} \\
+		2. &\quad \text{Pole und Nullstellen berechnen} \\
+		   &\quad \text{falls Parameter vorhanden} \\
+		3. &\quad s^2 + \mathbf{p}s + \mathbf{q} = 0 \\
+		4. &\quad \text{Parameter für: } \mathbf{p}>0, \mathbf{q}>0 \\
+	\end{align*}
+
+
+\subsubsection*{Hurwitz}
+\begin{alignat*}
+	11. \quad \forall a &\in \left[a_0, \ldots,  a_n\right] , a_i<0 \wedge a_i>0 \\
+	2. \quad D_1 &= a_2 \overset{!}{>} 0 \\
+	D_{2} &=\operatorname{det}\left|
+		\begin{array}{ll}a_{1} & a_{3} \\ 
+		a_{0} & a_{2}
+	\end{array}\right| \overset{!}{>}0\\
+	D_{2} &=a_{1} a_{2}-a_{3} a_{0}\overset{!}{>}0 \\
+	D_{3} &=\operatorname{det}\left|
+		\begin{array}{lll}a_{1} & a_{3} & 0 \\
+				  a_{0} & a_{2} & 0 \\
+		                  0 & a_{1} & a_{3}
+		\end{array}
+		\right| \overset{!}{>} 0\\
+	D_{3} &=a_{1} a_{2} a_{3}-a_{3} a_{0} a_{3}\overset{!}{>}0 \\
+	D_3 & = D_2 \cdot a_3 \\
+\end{alignat*}
+
+\paragraph{Vereinfachtes Nyquist \\ Kriterium} ist anwendbar, wenn die Übertragungsfunktion \\
+1. Integrierendes Verhalten aufweist \\
+2. Alle $p_i > 0$ sind,\\ falls alle $< 0$ sind mit $-1$ multiplizieren \\
+$G_0(s) = G_S \cdot G_R \leftarrow \text{Offene Kette}$ \\
+Geschlossene Kette stabil, wenn kritische Punkt (-1,0) zur Linken der in Richtung zur Frequenz durchlaufenden Ortskurve des Frequenzgangs liegt.
+
+\begin{align*}
+	%n = m + p > 0 \\
+	m + p \overset{!}{=} 0 \\
+	p = &\text{Anzahl positiver Pole des} \\ & \text{Offenen Regelkreises} \\
+	m = &\text{Anzahl der Umläufe um -1} \\ &\text{im Uhrzeigersinn} \\
+	%n = &\text{Anzahl positiver Pole des} \\ &\text{Geschlossenen Regelkreises} \\
+\end{align*}
+
+\begin{tikzpicture}[thick]
+	\draw[<->] (0,3) |- (3,0);
+	\draw[thin] (-0.1,2.5) node[left] {0} -- (3,2.5);
+	\draw[thin] (2.5,-0.1) node[below] {0} -- (2.5,3);
+	\draw (-0.5,1.5) node {$\Im$};
+	\draw (1.5,-0.5) node {$\Re$};
+	\draw (2.5,2.5) parabola bend (1.9,2.9) (0,0.4);
+
+	\draw[<->, blue!80] (2.5,3) to  (1.15,3) node[above, xshift=-1mm] {$|G_0(i\omega_\pi)| = \frac{1}{A_R}$};
+	\draw[thin, dashed] (1.15,2.5)  to (1.15,3);
+	\clip (0,0) rectangle (2.9,2.9);
+        \draw[thin, dashed] (2.5,2.5) circle(2);
+
+	\draw[dotted] (2.5,2.5) to node[blue!80, above=1.5mm,very near end] {$\alpha_R$} (0,1.54);
+	\draw[blue!80] (1.15,2.5) circle(0.1) node[below right=-1mm] {$\omega_\pi$};
+	\draw[blue!80] (0.63,1.78) circle(0.1) node[below right, yshift=1mm] {$\omega_d$};
+
+	\clip (0,0) rectangle (0.63,2.5);
+        \draw[blue!80] (2.5,2.5) circle(2);
+\end{tikzpicture}
+Störunterdrückung $\sim$  \\ 
+$1,5<A_{R}<3,0$ und $20^{\circ}<\alpha_{R}<70^{\circ}$ \\
+Führungsverhalten $\sim$ \\ $ 4<A_{R}<10$ und $40^{\circ}<\alpha_{R}<60^{\circ}$
+
+\paragraph{Trigonometrie}
+\begin{align*}
+	\sin(0) &= 0 \\
+	\cos(0) &= 1 \\
+	\arctan(0) &= 0 \\
+	\arctan(\infty) &= \frac{\pi}{2} \\
+	\arctan(-\infty) &= \frac{-\pi}{2}
+\end{align*}
+
+%\begin{align*}
+%	\exp (i \omega t)&=\cos (\omega t)+i \cdot \sin (\omega t) \\
+%	\cos (\omega t)&=\frac{1}{2}(\exp (i \omega t)+\exp (-i \omega t)) \\
+%	\int_{a}^{b} f^{\prime}(x) \cdot g(x) \mathrm{d} x&=[f(x) \cdot g(x)]_{a}^{b}-\int_{a}^{b} f(x) \cdot g^{\prime}(x) \mathrm{d} x \\
+%	\sin (\omega t)&=\frac{1}{2 i}(\exp (i \omega t)-\exp (-i \omega t)) \\
+%	\sin ^{2}(x)&=\frac{1}{2}(1-\cos (2 x))
+%\end{align*}
+
+\end{multicols}
+
+%\begin{tikzpicture}[auto, node distance=2cm,>=latex', node distance=1.3cm]
+%	\node [input, name=in] (in) {};
+%	\node [sum, right of=in] (sum1) {};
+%	\node [block, above right=0cm and 0.65cm of sum1 ] (g1) {$G_1(s)$};
+%	\node [block, below right=0cm and 0.65cm of sum1 ] (g2) {$G_1(s)$};
+%	\node [sum, right of=sum1, node distance=2.6cm] (sum2) {};
+%	\node [output, name=out, right of=sum2] (out) {};
+%
+%	\draw [->] (in) -- node{$U(s)$} (sum1);
+%	\draw [->] (sum1) |-  (g1);
+%	\draw [->] (sum1) |-  (g2);
+%	\draw [->] (g1) -| node[pos=0.9, left] {$+$} (sum2);
+%	\draw [->] (g2) -| node[pos=0.9] {$+$} (sum2);
+%	\draw [->] (sum2) -- node{$Y(s)$} (out);
+%\end{tikzpicture}
+%
+%\begin{tikzpicture}[auto, node distance=2cm,>=latex', node distance=1.9cm]
+%	\node [input, name=in] (in) {};
+%	\node [block, right of=in ] (g1) {$G_1(s)$};
+%	\node [block, right of=g1 ] (g2) {$G_2(s)$};
+%	\node [output, name=out, right of=sum2] (out) {};
+%
+%	\draw [->] (in) -- node{$U(s)$} (g1);
+%	\draw [->] (g1) -- (g2);
+%	\draw [->] (g2) -- node{$Y(s)$} (out);
+%	
+%\end{tikzpicture}
+
+
+\paragraph{Regelverstärkung/Abweichung}
+	\begin{align*}
+		\lim _{t \rightarrow \infty} y(t) & =\lim _{s \rightarrow 0}(s \cdot Y(s))=\lim _{s \rightarrow 0}\left(s \cdot Z(s) \cdot F_{Z}\right) = \text{Regelabweichung}\\
+		\lim_{s\rightarrow0} & \left(s\cdot\frac{1}{s} G_W(s)\right) = 1 - \text{Verstärkung/Abweichung} \\
+		Z(s) &=\frac{1}{s} \lim _{s \rightarrow 0} \left(s \cdot \frac{1}{s} \cdot G_{z}(s)\right) = 1 -( 1- \text{Abweichung} ) \\
+		W(s) &= \frac{1}{s} \text{ Einheitssprung} \\
+	\end{align*}
+
+
+\subsubsection*{MIMO}
+\begin{enumerate}
+\item  falls $\Lambda=f(s)$, wähle stationären Zustand $(s=i, \omega=i 0=0)$ \\
+$\Lambda=\frac{1}{G_{11} G_{22}-G_{12} G_{21}}\left(\begin{array}{cc}G_{11} G_{22} & -G_{12} G_{21} \\ -G_{12} G_{21} & G_{11} G_{22}\end{array}\right)$ \\
+(Zeilen/Spaltensummen $\overset{!}{=}$ 1)
+
+\item Kopple die Stell- und Regelgrößen deren $\lambda$ nahe zu 1. \\
+\item  $\displaystyle N=\frac{\operatorname{det}\left|G_{s}(s=0)\right|}{\prod_{i=1}^{n} G_{sii}(s=0)} \geq 0$
+\end{enumerate}
+
+\subsubsection*{Chien, Hrones, Reswick}
+\begin{tikzpicture}[thick]
+	\draw[<->] (0,2) node[left] {$h(s)$} |- (3,0) node[below] {$t$};
+	\draw (0,0) to[bend right=29] (1,0.75); 
+	\draw (1,0.75) to[bend left=29] (2,1.5); 
+	\draw (2,1.5) to (3,1.5); 
+
+	\draw[densely dashed] (0,1.5) to (2,1.5); 
+	\draw[densely dashed] (.62,0) to (.62,2); 
+	\draw[densely dashed] (1.365,0) to (1.365,2); 
+	\draw[densely dashed] (0.62,0) to (1.62,2);
+
+	\draw[<->] (-0.2,0) to node[left] {$\Delta y$} (-0.2,1.5);
+	\draw (3,0.75) node[left] {$K_S = \frac{\Delta y}{\Delta u}$};
+
+	\draw[<->] (0.62,1.75) to node[above] {$T_g$} (1.365,1.75);
+	\draw[<->] (0.62,1.75) to node[above] {$T_u$} (0,1.75);
+\end{tikzpicture}
+
+	\begin{tabular}{@{} l*{5}{>{$}c<{$}} @{}}
+		\toprule
+		\multicolumn{2}{c}{Regler} & \multicolumn{2}{c@{}}{Aperiodisch} & \multicolumn{2}{c}{Überschwingung} \\
+		\cmidrule(l){3-6}
+		&& \text{Störung} & \text{Führung} & \text{Störung} & \text{Führung} \\
+		\midrule
+		P & K_R & \frac{0.3}{K_S} \frac{T_g}{T_u} & \frac{0.3}{K_S} \frac{T_g}{T_u} & \frac{0.7}{K_S} \frac{T_g}{T_u} & \frac{0.7}{K_S} \frac{T_g}{T_u} \\ \hline
+		PI & K_R & \frac{0.6}{K_S} \frac{T_g}{T_u} & \frac{0.35}{K_S} \frac{T_g}{T_u} & \frac{0.7}{K_S} \frac{T_g}{T_u} & \frac{0.6}{K_S} \frac{T_g}{T_u} \\
+		& T_n & 4T_u & 1.2T_g & 2.3T_u & T_g  \\ \hline
+		PID & K_R & \frac{0.95}{K_S} \frac{T_g}{T_u} & \frac{0.6}{K_S} \frac{T_g}{T_u} & \frac{1.2}{K_S} \frac{T_g}{T_u} & \frac{0.95}{K_S} \frac{T_g}{T_u} \\
+		& T_n & 2.4 T_u & T_g & 2 T_g & 1.35T_g  \\
+		& T_v & 0.42 T_u & 0.5 T_u & 0.42 T_u & 0.47 T_u  \\
+		\bottomrule
+	\end{tabular}
+
+\begin{tikzpicture}[auto, node distance=2cm,>=latex', node distance=1.9cm]
+	\node [input, name=in] (w) {};
+	\node [sum, right of=w] (s1) {};
+	\node [block, right of=s1 ] (g1) {$G_1(s)$};
+	\node [block, below=1mm of g1 ] (g2) {$G_2(s)$};
+	\node [sum, right of=g1] (s2) {};
+	\node [output, name=out2, right of=s2] (out1) {};
+	\node [block, right of=s2 ] (g3) {$G_3(s)$};
+	\node [input, name=z, above=9mm of s2] (z) {};
+	\node [output, right of=g3] (out2) {};
+
+
+	%\node [below left=-1mm of s1] {+};
+	\node [below right=-1mm of s1] {-};
+	\draw [->] (w) -- node{$W(s)$} (s1);
+	\draw [->] (s1) -- node[above] {$Y_A(s)$} (g1);
+	\draw [->] (g1) -- (s2);
+	\draw [->] (s2) -- node[name=y] {$Y_C(s)$} (g3);
+	\draw [->] (y) |- (g2) -| node[above right] {$Y_B(s)$} (s1);
+	\draw [->] (z) node[right] {$Z(s)$} -- (s2);
+	\draw [->] (g3) -- node[] {$Y(s)$} (out2);
+	
+\end{tikzpicture}
+\begin{align*}
+	Y_A &= W-Y_B, \quad  Y_B = G_2 \cdot Y_C \\
+	Y_C &= Y_A \cdot G_1 + Z, \quad Y  = Y_C \cdot G_3 \\
+	    &\Rightarrow Y = \frac{WG_3 + Z}{1+G_2G_3}G_3
+\end{align*}
+
+
+\end{multicols}
+\end{multicols}
+
+\end{landscape}
+
+
+\begin{multicols}{6}
+
+\begin{figure}[H]
+
+
+\begin{tikzpicture}[every node/.style={scale=0.6}, auto, node distance=2cm,>=latex', node distance=1.9cm]
+	\node [input, name=in] (in) {};
+	\node [sum, right of=in] (s1) {};
+	\node [block, right=0.4cm of s1 ] (g1) {Regler};
+	\node [block, right=0.4cm of g1 ] (a) {Aktor};
+	\node [block, below=0.3cm of a  ] (s) {Sensor};
+	\node [block, right of=a ] (g2) {Strecke};
+	\node [output, name=out, right of=g2] (out) {};
+
+	\node [tmp, below=0.8cm of s1] (tmp1) {};
+	\node [above=0.3cm of g2] (tmo) {};
+
+	\draw [->] (in) -- node {w} (s1);
+	\draw [->] (s1) -- node {e} (g1);
+	\draw [->] (g1) -- (a);
+	\draw [->] (a) -- node {u} (g2);
+	\draw [->] (tmo) node {z} -- (g2);
+	\draw [->] (g2) -- node[name=y] {$Y(s)$} (out);
+	\draw [->] (y) |- (s) -| node[pos=0.8, left] {$\pm$} (s1.south);
+\end{tikzpicture}
+
+\end{figure}
+
+\textbf{Sensor} wandelt physikalische in elektrische Signale.
+\\
+\textbf{Aktor} wandelt Elektrische in physikalische Signale.
+\\
+\textbf{Messgrößenumformung} z.B. thermische $\rightarrow$ mechanische $\rightarrow$ elektrisch \\
+\textbf{Eingangsfrößen} Wirkung der Umgebung auf das System, gezielt beeinflssbar, können zur Steuerung und Regelung verwendet werden. 
+\\
+\textbf{Zustandsgrößen} beschreiben einen solchen Zustand, in dem sich das Svstem zu jedem Zeitpunkt befindet: interne Größen des Systems; können auch Ausgangsgrößen sein.  
+\\
+\textbf{Ausgangsgrößen} Wirkung des Prozesses auf die  Umgebung 
+\\
+\textbf{Regelgroßen} sind geregelte Ausgange 
+\\
+\textbf{gemessene Ausgänge} = primäre Messgrößen 
+\\
+\textbf{SISO/MISO} Singel-Inpute-Single-Output / Multiple-Input-Multiple-Output 
+\\
+\textbf{Stellgrößen} Eingangsgrößen, die zur Steuerung oder Regelung benutzt werden
+\\
+\textbf{konzentriert:} Eine differentielle Größe bildet das System ab $\rightarrow$ ODE
+\\
+\textbf{verteilt} Partielle Differentialgleichung nötig
+\\
+\textbf{implizit} über differentiale von der Zeit ab (eg. Federschwinger)
+\\
+\textbf{explizit} von der Zeit ab (eg. Federschwinger mit m = m(t))
+\\
+\textbf{zeitkontinuierlich} h(t) ist für alle t definiert und > 0 (eg. Wassertank)
+\\
+\textbf{zeitdiskret} h(t) ist nicht für alle t definiert (eg. Lagerbestand, jeder digitale Sensor)
+\\
+\textbf{stabil} kehrt nach Störung in die Ruhelage zurück
+\\
+\textbf{instabil} ruhelage wird nach Störung dauerhaft verlassen
+\\
+\textbf{linearität} Verstärkungsprinzip und Superpositionsprinzip gelten 
+\begin{equation*}
+\varphi \cdot (\alpha + \beta) = \varphi \cdot \alpha + \varphi \cdot \beta
+\end{equation*}
+\textbf{nichtlineartät} eg. Druck am Boden eine Wasserbehälters
+\\
+\textbf{Blockschaltbilder Zweck} 
+	\begin{enumerate}[leftmargin=4mm]
+			\item Systemidentifikaton / Klassifikation (Blockschaltbilder, SISO $\rightarrow$ MIMO)
+			\item Mathematische Modellierung (Aufstellen von (DBLn, Linearisieren, Laplace-Transformation)
+			\item Modellanalyse (Reglertypen, Rechnen mit Blockschaltbildern, Stabilitätsanalyse)
+	\end{enumerate}
+\textbf{statische Blöcke} sind nicht abhängig von der Zeit $\rightarrow$ doppelt umrahmt
+\\
+\textbf{dynamische Blöcke} sind Zeitlich abhängig (DGL) $\rightarrow$ einfach umrahmt
+\\
+\textbf{Superposition} Lineare Abbildung $f(a x+y)=a f(x)+f(y)$
+\\\\\\
+\textbf{Laplace Transformation}\\ $F(s)=L\{f(t)\}$\\$=\int_{-0}^{\infty} f(t) \cdot e^{-s t} d t$
+\\
+\textbf{Impulsfunktion\\} $\delta(t) = \lim_{s \rightarrow 0}
+	\begin{cases}
+		1/\epsilon	&\text{für} t \in [0,\epsilon] \\
+		0	&\text{sonst}
+	\end{cases}$
+	$\text{mit} \int_{-\infty}^{\infty} \delta(\tau)\; d\tau = 1$
+\\
+\textbf{Gewichtsfunktion} Grenzwertverhalten gibt Information über die Stabilität. $g(t)=\frac{y(t)}{\int_{-\infty} u(t) \mathrm{d} t}$
+\\
+\textbf{Sprungfunktion\\} $u(t) = u_0 H(t)$
+\\
+\textbf{Sprungfunktion\\} $s(t)=\int_{-\infty}^{t} \delta(\tau) d \tau$
+\\
+\textbf{Übergangsfunktion\\}  $\mathrm{h}(t)=\frac{y(t)}{u_{0}} = \frac{\text{ Sprungantwort }}{\text{Sprunghöhe }} = \int_{-\infty}^{t} g(\tau)\; d\tau$
+\\
+\textbf{Sprungantwort} Reaktion des Systems auf die Sprungfunktion.
+\\
+\textbf{Impulsantwort} Reaktion des Systems auf die Impulsfunktion.
+\\
+\textbf{Bode-Diagramm} logarithmische Darstellung der Amplitude und Phasenverschiebung.
+\\
+\textbf{Reihenschaltung im Bode-Diagramm} Multiplikation wird zur Addition durch logarithmische Scalierung
+\\
+\textbf{Frequenzgang} Ein-/Ausgangsverhältnis von Amplitude und Phase $\displaystyle \frac{Y}{U} = G(i\omega)$ 
+\\
+\textbf{Ortskurve} Darstellung von Phase und Frequenz als Verlauf des Vektors $\left(\begin{array}{c} \Re(G(i\omega) \\ \Im(G(i\omega) \end{array}\right)$ bestimmbar durch Anregung und Messung von verschiedenen Frequenzen.
+\\
+\textbf{Amplituden-/phasenreserve} gibt mögliche Amplituden-/phasenerhöhung bis zur Instabilität an.
+\\
+\textbf{Übertragungsstabil} beschränktes Eingangssignal $\rightarrow$ beschränktes Ausgangssignal
+\begin{figure}[H]
+\textbf{Kaskadenregelung} Hauptregler legt Sollwert eines Hilfsreglers fest \\
+Untergeordneter Hilfsregler verbirgt Störungen in dem Prozessteil, den er regelt, vor dem übergeordneten Regler \\
+	\textit{Zweck}: oft zur Beschleunigung von Regelvorgängen
+
+\begin{tikzpicture}[every node/.style={scale=0.38}, auto, node distance=1.5cm,>=latex', node distance=2cm]
+	\node [input, name=in] (in) {};
+	\node [sum, right of=in] (s1) {};
+	\node [block, right=2mm of s1 ] (g1) {Haupt};
+	\node [sum, right=2mm of g1] (s2) {};
+	\node [block, right=2mm of s2 ] (g2) {Hilfs};
+	\node [block, right of=g2 ] (g3) {};
+	\node [block, right of=g3 ] (g4) {};
+	\node [output, name=out, right=2mm of g3] (o1) {};
+	\node [output, name=out, right of=g4] (o2) {};
+	\node [tmp, below=0.6cm of s1] (t1) {};
+	\node [tmp, below=0.4cm of s2] (t2) {};
+	\draw [->] (in) --  (s1);
+	\draw [->] (s1) --  (g1);
+	\draw [->] (g1) --  (s2);
+	\draw [->] (s2) --  (g2);
+	\draw [->] (g2) --  (g3);
+	\draw [->] (g3) --  (g4);
+	\draw [->] (g4) -- node[name=y] {} (o2);
+	\draw [->] (o1) |-  (t2) -- (s2);
+	\draw [->] (y) |-  (t1) -- (s1);
+	\draw [->] (g4) --  (o2);
+\end{tikzpicture}
+\end{figure}
+\textbf{Vorregelung} Regle wichtige Größe, bevor sie das eigentliche zu regelnde System erreicht, zur minder von Störungen. duh
+\textit{Beispiel:} isothermer Reaktor zu Bakteriellen Abwasserreinigung
+\\
+\textbf{Störgrößenaufschaltung} Messen von Störgrößen bevor sie bei der Hauptregelung ankommen, benötigt hilfsregler und messbare Störgröße. Ermöglicht schnelleres eingreifen.
+\\
+\textbf{Override-Regelung} Regelung kann zwischen verschiedenen Modi umgeschaltet werden
+\\
+\textbf{Auswahllogik} Ein Regler wählt immer die relevanteste Größe von verschiedenen Sensoren aus
+\\
+\textbf{Verhältnisregelung} Verhältnis von Messgrößen wird ausgewertet
+\\
+\textbf{Advanced Process Control (APC)} 
+In technischer Anwendung müssen ‚ Prozessregler während des Betriebs zur Verbesserung der Regelgüte angepasst werden (Control Performance Management) \\
+\textit{Massnahmen:} Integration von Überwachungsbausteinen in die jeweiligen Regelkreise (z.B. ConPerMon von Siemens), Automatische Protokollierung von Regelgüte und auftretenden Fehlern Verbess bedarf \\
+Hintergrund: Durch große Anzahl an (PID-) Reglern innerhalb eines großtechnischen Prozesses ist eine manuelle Überwachung der Regelkreise und Veränderung der Parameter während des Betriebs oft nicht möglich. $\rightarrow$ \texttt{Process-Controll-Management}
+\\
+\textbf{Loopshaping} Optimierung der offenen Kette meist durch "Spaping" von Frequenzgang/Ortskurve.
+\\
+\textbf{Nyquist Kriterium}
+Die Ortskurve muss den Punkt -1 für den Durchlauf der Frequenzen von $-\infty \rightarrow \infty$ so oft umlaufen, wie der offene Kreis Pole in der Linken Halbebene besitzt. \\
+\textbf{Nyquist-Vorteil} auf offene kette anwendbar
+\\
+\textbf{Regelfaktor R} $=\frac{\Delta_{w \infty}}{\Delta_{w \infty 0}}=\frac{\text {bl. Regelabweichung mit Regler}}{\text {bl. Regelabweichung ohne Regler}}$
+\\
+\textbf{betragslineare Regelfläche} $I=\int_{0}^{\infty}|y(t)-w| d t$
+\\
+\textbf{zeitbeschwerte \\betragslineare Regelfläche} $I=\int_{0}^{\infty}|y(t)-w|t d t \rightarrow$ gewichtet später auftretende Abweichungen stärker.
+\\
+\textbf{quadratische Regelfläche} $I=\int_{0}^{\infty}(y(t)-w)^{2} d t \rightarrow$ gewichtet größere abweichungen Stärker.
+\\
+\textbf{Totzeitglied} Zeitliche Verzögerung ohne verstärkung z.B Rohr, Mechanische Laufzeiten
+\\
+\textbf{Systemidentifikation Bild- vs Zeitbereich} Zeitbereich ist einfacher aber Bildbereich ist genauer.
+\\
+\textbf{Festwertregelung} w = const.
+\\
+\textbf{Folgeregelung} w = w(t)
+
+\begin{figure}[H]
+
+\begin{tikzpicture}[thick]
+	\draw[<->] (0,3) |- (3.5,0);
+	\begin{axis}[scale=0.50,domain=0:5,samples=501,axis lines=none, xlabel={}, ylabel={}]
+		\addplot[color=red!80,no marks,thick,smooth] {(1-exp(-x)*cos(10*deg(x)*.5))}; 
+	\end{axis}
+	\draw[dashed] (0,2.1) -- (3,2.1);
+	\draw[dashed,thin] (0,1.675) -- (3,1.675);
+	\draw[dashed] (0,1.25) -- (3,1.25);
+	\draw[<->] (3,1.25) -- node[below, rotate=90,scale=0.7] {Einschwing\-toleranz} (3,2.1);
+	\draw[<->] (0,1.25) -- node[above] {$T_{an}$} (0.42,1.25);
+	\draw[<->] (0,2.1) -- node[above] {$T_{ein}$} (0.75,2.1);
+	\draw[<->,blue!80] (0.62,1.675) -- (0.62,2.6) node[above] {$\Delta y_{max}$};
+\end{tikzpicture}  
+
+\end{figure}
+
+\textbf{Fließbilder}
+\begin{itemize}
+	\item[TC] = Temperaturregler
+	\item[FC] = Durchflussregler
+	\item[CC] = Konzentrationsregler
+	\item[TI] = Temperatursenesor
+	\item[LI] = Höhenmesser
+\end{itemize}
+
+\textbf{KI}  Mustererkennung, Analyse, Kommunikation \\
+\textbf{Fuzzy}-Control  Fuzzifizierung (Bewertungsfunktiontn), Auswertung von Expertenregeln, Defuzzifizieren \\
+\textbf{Neural-Network}  Menschliches Denken nachbilden \\
+\textbf{Neuron}  Empfang und Ausgang von Signalen, nimmt gewichtung vor \\
+
+
+
+\end{multicols}
+
+
+
+\end{document}
+

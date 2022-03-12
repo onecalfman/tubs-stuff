@@ -1,0 +1,391 @@
+\documentclass[twocolumn]{article}
+
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{tikz}
+\newcommand\yt{http://www.youtube.com/embed/IwLSrNu1ppI?autoplay=1&controls=0&loop=1&start=01}
+\usepackage[T1]{fontenc}
+\usepackage{coffee}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+ \geometry{
+	 paperwidth=147cm,
+	 paperheight=147cm,
+	 left=30mm,
+	 right=10mm,
+	 top=30mm,
+	 bottom=20mm,
+	 }
+\usepackage{hyperref}
+\usepackage{CrimsonPro}
+\usetikzlibrary{mindmap,trees}
+\begin{document}
+\pagestyle{empty}
+
+\begin{tikzpicture}[	
+			mindmap, 
+			concept, 
+			every node/.style = {concept,minimum size=0cm}, 
+			concept color=darkgray,
+			text=white,
+			grow cyclic,
+			text width=3.5cm, 
+			%align=flush center,
+			level 1/.style={level distance=10cm, sibling angle=35, font=\large},
+			level 2/.style={level distance=7.5cm, sibling angle=35, font=\large},
+			level 3/.style={level distance=7cm, sibling angle=43, font=\large}, 
+			level 4/.style={level distance=6cm, sibling angle=40,  font=\normalsize}
+		]
+	\draw (10,20) node[text width=70mm] {\href{https://www.youtube.com/watch?v=P1CyPjQQTAM}{\Huge \textbf{Staat}}}
+[clockwise from =100]
+child { node (gg) {Grundgesetz}
+[clockwise from=170]
+	child {node {Funktionen}
+	[clockwise from=270]
+		child {node {Abwehrfunktion}}
+		child {node {Teilhabefunktion}}
+		child {node {Leistungsfunktion}}
+		child {node {Werteordnung }}
+		}
+	child {node {Schutz}
+	[clockwise from=130]
+		child { node {Schutz des Individuums}}
+		child { node {Schutz der Kommunikations mit anderen}}
+		child { node {Schutz der Erwerbstätigkeit und ihrer Ergebnisse }}
+		}
+	}
+child  { node {Bestandteile} 
+	child { node { Staatsgebiet}}
+	child { node { Staatsvolk}}
+	child { node { Staatsgewalt}} }
+child[yshift=7cm, xshift=7cm] { node {Staatsstruktur\-\-prinzip}
+[clockwise from=110]
+	child[sibling angle=30] { node {Demokratie\-prinzip}}
+	child[sibling angle=30] { node {Sozialstaats\-prinzip}}
+	child[sibling angle=30] { node {Rechtstaats\-prinzip}}
+	child[sibling angle=30] { node {Gewaltenteilungs\-prinzip}}
+	child[sibling angle=30] { node {Bundesstaat\-prinzip}}
+	child[sibling angle=30] { node {Volkssouveränität}}
+	}
+child { node {Bundesorgane}
+[clockwise from=70]
+	child[sibling angle=30] { node {Bundestag}}
+	child[sibling angle=30] { node {Bundesrat}}
+	child[sibling angle=30] { node {Bundesregierung}}
+	child[sibling angle=30] { node {Bundespräsident}}
+	child[sibling angle=30] { node {Bundesverfassungs\-gericht}}
+	}
+
+	;
+	\draw (45,32) node[text width=65mm] {\Huge{\href{http://www.youtube.com/embed/a3f7n08yYUU?autoplay=1&controls=0&loop=1&start=30}{\textbf{Privat\-autonomie}}\\ \Large Recht private Rechtsverträge nach eigener Entscheidung zu gestalten Art. 2 GG}}
+	[clockwise from=120]
+	child { node {Vertragsfreiheit}
+	[clockwise from=150]
+		child { node {Abschlussfreiheit}}
+		child { node {Inhaltsfreiheit}}
+		child { node {grundsätzliche Formfreiheit}}
+		child { node {\textbf{Ausnahme} \\ Kontrahierungs\-zwang}}
+		}
+	child { node {Testierfreiheit}}
+	child { node {Eigentumsfreiheit}}
+	child { node {Grenzen}
+	[clockwise from=65]
+		child { node {Schutz der Schwächeren Vertragspartei $\rightarrow$ gerechtes Ergebnis}}
+		child { node {Verbote}
+			child { node {Gesetzliches Verbot}}
+			child { node {Veräußerungs\-verbot}}
+			child { node {Verstoß gegen die gute Sitte}}
+			}
+			}
+ ;
+\draw (-30,25) node[text width=70mm] {\Huge \textbf{Gesetzgebung} \\\Large\href{https://www.youtube.com/watch?v=j30H6pcg7lE}{[Video]}}
+child { node[text width=50mm] {\textbf{Verwaltungsakt:} hoheitliche Maßnahme einer Behörde die konkrete Einzelfälle auf dem Gebiet des öffentlichen Rechts regelt und auf eine Rechtsfolgen gerichtet ist.}}
+child { node {\textbf{Gesetzgeber}}
+	child {node {Gemeinden}}
+	child {node {Länder}}
+	child {node {Bund}} }
+child { node {Gesetzgebungs\-kompetenz}
+	child { node {\textbf{ausschließlich}}}
+	child[sibling angle=50] { node[text width=50mm] {\textbf{konkurrierend:} Recht Gesetze zu geben, wenn der andere von Seiner Befugnis keinen Gebrauch macht \\ z.B. Dürfen die Länder bestimmte bereche regeln solange der Bund kein Gesetz erlässt.}}
+	}
+	;
+
+\draw (50,-5) node[text width=70mm] {\href{https://www.youtube.com/watch?v=hpjV962DLWs&t=19}{\Huge \textbf{Recht}}}
+[clockwise from = 152]
+child { node {\textbf{Subjektive:} Ansprüche des Einzelnen, die aus den Rechtsnormen hervorgehen}
+[clockwise from = 140]
+	child { node { \textbf{absolut:} gegenüber allen (eg. Eigentum)}}
+	child { node { \textbf{relative:} gegenüber einzelnen (eg. Vertrag)}} }
+child[level distance=20cm] { node {\textbf{Geschrieben/ Ungeschrieben} Gesetzestexte/ Gewohnheitsrecht}
+[clockwise from=180]
+	child { node {Verfassungs\-normen}}
+	child { node {Gesetzliche Normen}}
+	child { node {Verordnungen}}
+	child { node {Satzungen}}}
+child[yshift=2cm] { node {\textbf{Funktionen:}}
+	 child { node {Ordnungsfunktion}}
+	 child { node {Gerechtigkeits\-funktion}}
+	 child { node {Herrschafts- und Kontrollfunktion}}
+	 child { node {Friedenssicherung}}
+	 child { node {Freiheitssicherung}} } 
+child { node {\textbf{Zwingend:} Darf vertraglich nicht abgeändert werden \\ \textbf{Nachgiebig:} steht zur Disposition }} 
+child[yshift=2cm,xshift=2cm] { node {\textbf{Vorrang:} bei der Anwendbarkeit von mehreren Rechtsnormen auf einen Sachverhalt}
+[clockwise from = 70]
+	child { node {\href{https://de.wikipedia.org/wiki/Kollisionsregel\#Allgemeine_Kollisionsregeln}{lex-specialis}}}
+	child { node {\href{https://de.wikipedia.org/wiki/Kollisionsregel\#Allgemeine_Kollisionsregeln}{lex-specialis}}}
+	child { node {\href{https://de.wikipedia.org/wiki/Kollisionsregel\#Allgemeine_Kollisionsregeln}{lex-specialis}}
+	[clockwise from=30, text width=50mm]
+		child { node {\begin{enumerate}
+				\item Europarecht
+				\item Grundgesetz
+				\item Formelle Gesetze \\ (z.B BGB)
+				\item Materielle Gesetze
+		\end{enumerate}}}
+	}}
+child { node {\textbf{Abgrenzung}}
+[clockwise from=30]
+	child { node {\textbf{Bräuche} Konformitätserwartung, kaum Repressalien bei Missachtung}}
+	child { node {\textbf{Sitten} Stärkere Konformitätserwartung, negative Wahrnehmung in der Gesellschaft}}
+	child { node {\textbf{Recht} Konformitätszwang, Bestrafung durch den Staat bei nichtbeachtung}}}
+child { node {\textbf{Formell:} Verfahrensrecht (eg. §136 StPo)}} 
+child { node {\textbf{Materiell:}  für die Rechtslage entscheidend }} 
+child { node {\textbf{Objektive:} Summe aller rechtlichen Normen}
+[clockwise from = 270]
+	child { node {\textbf{Öffentlich:} Recht zwischen Staat und Bürgern, gekennzeichnet durch eine (Unterordnung)}
+		child { node {Staats und Verwaltungsrecht}}
+		child { node {Strafrecht}}}
+	child { node {\textbf{Zivil:} Recht zwischen Bürgern und Bürgern, (Gleichordnung)}} }
+child { node {\textbf{Eigenschaften}}
+[clockwise from = 240]
+	child { node {allgemein}}
+	child { node {abstrakt}}
+	child { node {verbindlich}}
+	child { node {bekannt zu machen}}};
+
+ \draw (0,-30) node[text width=70mm] {\href{\yt}{\Huge \textbf{Rechtsgeschäfte}}}
+ 		child { node {zweiseitige Rechtsgeschäfte}
+			child { node {\textbf{Vertrag}:\\ besteht aus zwei übereinstimmenden Willenserklärungen}
+				child { node {Angebot}}
+				child { node {Annahme}}
+				child { node {\textbf{\href{https://www.gesetze-im-internet.de/bgb/__433.html}{§ 433}} Vertragstypische Pflichten beim Kaufvertrag}}}}
+		child[level distance=7.5cm, sibling angle=37] { node {einseitige Rechtsgeschäfte}
+		[clockwise from=30]
+			child { node {Testament}}
+			child { node {Kündigung}}
+			child { node {Widerruf}} }
+		child[level distance=14cm, sibling angle=40] { node {\textbf{Willenserklärung} \\ Willensäußerung die auf eine Rechtsfolge gerichtet ist. \\ \href{https://youtu.be/4XvpPpcQ320?t=198}{[Video]}}
+		[clockwise from=80]
+			child[level distance=9cm]{ node[text width=57mm] {\textbf{ad incertas personas} \\ das Angebot an die Allgemeinheit \\ \textbf{invitation ad offerendum} \\ die Einladung zur abgabe eines Angebotes \\ ist kein wirksames Angebot, da die Vertragsparteien nicht Festgelegt sind und ein erkennbarer Rechtsbindungswille fehlt.}}
+			child[level distance=10.5cm] { node {Wirksamwerden}
+					child { node {Empfangsbedürftige Willenserklärung}
+						[clockwise from=120]
+						child { node {\textbf{Abgabe} \\ auf den Weg bringen zum Empfänger}}
+						child { node {\textbf{Zugang §130} \\ (nicht wirksam wenn gleichzeitig ein Widerruf zugeht)}}
+						child[sibling angle=43] { node {\textbf{Unter anwesenden} \\ (Auch Telefonat o.Ä.) \\ Zugang, sofort, wenn der Erklärende davon ausgehen kann vollständig verstanden worden zu sein.}
+						}}
+					child { node {nicht Empfangsbedürftige Willenserklärung}} }
+				child { node {Teile}
+				[clockwise from=35]
+				child { node {objektiver Tatbestand \\ die äußere Erklärung \\ ausdrücklich oder konkludent}}
+				child { node {subjektiver Tatbestand \\ der Erklärungswille}
+					child { node {Handlungswille}}
+					child { node {Erklärungsbewusstsein}}
+					child { node {Geschäftswille}
+					[clockwise from=-30]
+						child { node {Willenstheorie}}
+						child { node {Erklärungstheorie}}}
+					}
+			}	
+			child[sibling angle=40] { node {\textbf{Auslegung} \\ dem objektivem Empfängerhorizont, das heißt Nach dem Verständnis eines Verständigen aber außenstehendem Dritten.} 
+			[clockwise from=340]
+				child[level distance=7cm] { node {\textbf{\href{https://www.gesetze-im-internet.de/bgb/__133.html}{§ 133}} \\ Bei der Auslegung einer Willenserklärung ist der Wirkliche Wille zu erforschen und nicht and em buchstäblichen Sinne des Ausdrucks zu haften.}}
+				child[sibling angle=50,level distance=7cm] { node {\textbf{\href{https://www.gesetze-im-internet.de/bgb/__157.html}{§ 157}} \\ Verträge sind so auszulegen, wie Treu und Glauben mit Rücksicht auf die Verkehrssitte es erfordern.  }}
+				child[sibling angle=50,level distance=7cm] { node {\textbf{Falschbezeichnung} schadet nicht, wenn sie übereinstimmend geschieht.}}
+			}
+			}
+		child { node {\textbf{Anspruch} \\ Recht, von einem anderen ein Tun oder Unterlassen zu fordern \\ \href{https://youtu.be/4XvpPpcQ320?t=21}{[Video]}}}
+	child[level distance=18cm, sibling angle=23] { node {\textbf{Geschäftsfähigkeit} \\ Fähigkeit, selbst durch eigen Willenserklärung Rechtsfolgen herbeizuführen.\href{https://www.youtube.com/watch?v=19r5JPeMqKE&list=PLmDXSisAu6U6OCPkn0bqsS45A9kBf88YZ&index=4}{[Video]}}
+	[clockwise from=90]
+		child[] { node {\textbf{\href{https://www.gesetze-im-internet.de/gg/art_2.html}{§ 2}} \\ Eintritt in die Volljährigkeit}}
+		child[level distance=15cm] { node[text width=45mm] {Geschäftsunfähigkeit}
+		[clockwise from=130]
+			child { node {\textbf{\href{https://www.gesetze-im-internet.de/bgb/__105a.html}{§ 105a}}\\ Geschäfte des täglichen Lebens}}
+			child { node {\textbf{\href{https://www.gesetze-im-internet.de/bgb/__104.html}{§ 104}} \\ Geschäfts\-unfähigkeit }}
+			child { node {Rechtliche Betreuung \\ \textbf{\href{https://www.gesetze-im-internet.de/bgb/__1896.html}{§ 1896}} Voraussetzungen \\ Beschränkte Geschäftsfähigkeit Minderjähriger}}
+			child { node {\textbf{\href{https://www.gesetze-im-internet.de/bgb/__1626.html}{§ 1626}} \\ Elterliche Sorge \\ \textbf{\href{https://www.gesetze-im-internet.de/bgb/__1629.html}{§ 1629}} \\ Vertretung des Kindes}}
+			}
+		child { node {beschränkte Geschäftsfähigkeit}
+		[clockwise from=30]
+			child { node {\textbf{\href{https://www.gesetze-im-internet.de/bgb/__110.html}{§ 110}} \\ Bewirken der Leistung mit eigenen Mitteln}}
+			child { node {\textbf{\href{https://www.gesetze-im-internet.de/bgb/__108.html}{§ 108}} Vertragsschluss ohne Einwilligung \\ (Schwebende Unwirksamkeit)}}
+			child { node {\textbf{\href{https://www.gesetze-im-internet.de/bgb/__107.html}{§§ 107}} \\ Einwilligung des gesetzlichen Vertreters}}
+			child { node {\textbf{\href{https://www.gesetze-im-internet.de/bgb/__106 .html}{§§ 106 ff.}} \\ Beschränkte Geschäftsfähigkeit Minderjähriger}}
+		}}
+		child[sibling angle=40] { node {\textbf{Stellvertretung} \\ ist bei allen Rechtsgeschäften außer bei höchstpersönlich z.B Testament, Heirat\\\href{https://www.youtube.com/watch?v=rU-81QXETsI&list=PLmDXSisAu6U6OCPkn0bqsS45A9kBf88YZ&index=5}{[Video]}\\\href{https://www.uni-trier.de/fileadmin/fb5/prof/ZIV008/stadler/KurzskriptStellvertretungsrecht.pdf}{[Kurzskript]}}
+			[clockwise from=90]
+				child[yshift=2cm,xshift=-1cm] { node {\textbf{eigene Willens\-erklärung} \\ das heißt Entscheidungsspielraum}
+				child { node {\textbf{\href{https://www.gesetze-im-internet.de/bgb/__165.html}{§ 165}} Beschränkt geschäftsfähiger Vertreter} }
+				}
+			child { node {handeln in \textbf{fremdem} \textbf{Namen}}
+			[clockwise from=92]
+				child[text width=50mm, level distance=8cm] { node {\textbf{\href{https://www.gesetze-im-internet.de/bgb/__164.html}{§ 164}} Wirkung der Erklärung des Vertreters \\ \textbf{Offenkundigkeitsprinzip} \\ es muss konkludent ersichtlich sein, wen der Vertreter vertritt}
+				child[level distance=7cm] { node {Ausnahme: Geschäft für den, den es Angeht}}}
+				}
+			child { node {\textbf{Vertretungsmacht}}
+			[clockwise from=90]
+				child { node {\textbf{\href{https://www.gesetze-im-internet.de/bgb/__166.html}{§ 166}} Willensmängel; Wissenszurechnung}}
+				child[level distance=7.3cm] { node {Vollmacht}
+				[clockwise from=110]
+					child[] { node {\textbf{\href{https://www.gesetze-im-internet.de/bgb/__171.html}{§ 171}} Wirkungsdauer bei Kundgebung \\ kundgemachte Innenvollmacht}}
+				child { node {\textbf{\href{https://www.gesetze-im-internet.de/bgb/__167.html}{§ 167 II}} Erteilung der Vollmacht \\ Formfreiheit außer bei Risikobehafteten Geschäften}}
+					child[sibling angle=40, level distance=7cm] { node {\textbf{\href{https://www.gesetze-im-internet.de/bgb/__167.html}{§ 167 I}} Erteilung der Vollmacht \\ Kann sowohl dem Vertreter gegenüber erklärt werden (\textbf{Innenvollmacht}) auch dem Dritten \textbf{Außenvollmacht}}}
+				child[] { node {rechtliches Können im Außenverhältnis \\ rechtliches Dürfen im Innenverhältnis}
+				[clockwise from=37]
+					child { node {\textbf{\href{https://www.gesetze-im-internet.de/bgb/__280.html}{§ 280}} Schadensersatz wegen Pflichtverletzung }}
+					child { node {\textbf{\href{https://www.gesetze-im-internet.de/bgb/__665.html}{§ 665}} Abweichung von Weisungen}} }
+					}
+				child[level distance=5.8cm] { node {Vertreter ohne Vertretungsmacht \\ \textbf{\href{https://www.gesetze-im-internet.de/bgb/__177.html}{§ 177}} \\ \textbf{\href{https://www.gesetze-im-internet.de/bgb/__178.html}{§ 178}} \\ \textbf{\href{https://www.gesetze-im-internet.de/bgb/__179.html}{§ 179}} }}
+				}
+				child[level distance=17cm, yshift=5cm] { node {Anschein und Duldungs\-vollmacht} 
+				[clockwise from=10]
+					child[level distance=9cm] { node {Duldungs\-vollmacht}
+					[clockwise from=65]
+						child { node {Auftreten als Vertreter}}
+						child { node {Vertretung wird wissentlich geduldet}}
+						child { node {\textbf{\href{https://www.gesetze-im-internet.de/bgb/__242.html}{§ 242}} Leistung nach Treu und Glauben \\ Dritter nimmt Innenvollmacht an}}
+						}
+					child[sibling angle=40] { node {Anscheins\-vollmacht}
+					[clockwise from=03]
+						child[sibling angle=40] { node {wiederholtes Auftreten als Vertreter}}
+						child[sibling angle=40] { node {fahrlässige Unkenntnis des Vertretenden}}
+						child[sibling angle=40] { node {\textbf{\href{https://www.gesetze-im-internet.de/bgb/__242.html}{§ 242}} Leistung nach Treu und Glauben \\ Dritter nimmt Innenvollmacht an}}
+						}
+						}
+				child { node {Missbrauch der Vertretungsmacht}
+				[clockwise from=29]
+					child { node {Wider dem Innenverhältnis \\ Zu lasten des Vertretenden außer \textbf{\href{https://www.gesetze-im-internet.de/bgb/__138.html}{§ 138}} Sittenwidriges Rechtsgeschäft; Wucher}}
+					child { node {Wider dem Außenverhältnis ?}}
+				}
+				}
+child[sibling angle=70] { node {Widerrufsrecht}
+	child { node {Verbraucher\-schützende Widerrufsrechte}
+		child { node {Begriffe}
+			child { node {\textbf{\href{https://www.gesetze-im-internet.de/bgb/__13.html}{§ 13}} Verbraucher}}
+			child { node {\textbf{\href{https://www.gesetze-im-internet.de/bgb/__14.html}{§ 14}} Unternehmner}}}
+		child[level distance=16cm] { node {\textbf{\href{https://www.gesetze-im-internet.de/bgb/__355.html}{§ 355}} Widerrufsrecht bei Verbraucherverträgen}
+			child { node {\textbf{\href{https://www.gesetze-im-internet.de/bgb/__506.html}{§ 506}} Zahlungsaufschub, sonstige Finanzierungshilfe}}
+			child { node {\textbf{\href{https://www.gesetze-im-internet.de/bgb/__495.html}{§ 495}} Verbraucherdarlehensverträge}}
+			child { node {\textbf{\href{https://www.gesetze-im-internet.de/bgb/__485.html}{§ 485}} Widerruf bei Teilzeit-Wohnrechtev., V. über langfristige Urlaubsprodukte, Vermittlungsv. Tauschsystem}}
+			child { node {\textbf{\href{https://www.gesetze-im-internet.de/bgb/__312g.html}{§ 312g}} Widerrufsrecht}}
+			child { node {\textbf{\href{https://www.gesetze-im-internet.de/bgb/__312c.html}{§ 312c}} Fernabsatzverträge}}
+			child { node {\textbf{\href{https://www.gesetze-im-internet.de/bgb/__312b.html}{§ 312b}} Außerhalb von Geschäftsräumen geschlossene Verträge}}
+	}
+	}
+	child { node {Allgemeines Widerrufsrecht}
+		child[text width=60mm] { node {\textbf{\href{https://www.gesetze-im-internet.de/bgb/__130.html}{§ 130}} Jeder kann seine Willenserklärung widerrufen, wenn der Widerruf vorher oder gleichzeitig mit ihr dem Empfänger zugeht.}}
+	}
+	}
+ 		;
+ \draw (55,-55) node[text width=65mm] {\href{https://www.gesetze-im-internet.de/bgb/__241.html}{\Huge \textbf{§ 241 \\ Schuldverhältnis}} \Large Kraft des Schuldverhältnisses ist der Gläubiger berechtigt, von dem Schuldner eine Leistung zu fordern. Die Leistung kann auch in einem Unterlassen bestehen.\\ \href{https://www.youtube.com/watch?v=g6YWT-rTLuk&list=PLmDXSisAu6U4zgKS-squl9wuT13jEVKJr&index=1}{[Video kurz]}  \href{https://www.youtube.com/watch?v=riKwEnti2ak&list=PLVm4A7JDBCVbuQr1w3aRxIr7KINFrQlek&index=1&t=92}{[Video lang]} }
+ child[text width=60mm, level distance=11cm] { node {Trennungs- und Abstraktionsprinzip \\Das Sachenrechtliche \textbf{Verfügungsgeschäft} muss vom Schuldrechtlichen \textbf{Verpflichtungsgeschäfte} getrennt werden \href{https://www.youtube.com/watch?v=k-QTFj4n64I&list=PLmDXSisAu6U6OCPkn0bqsS45A9kBf88YZ&index=3}{[Video]}}
+ [clockwise from=00]
+	child[level distance=10cm, text width=63mm] { node {Verpflichtungsgeschäft: \\ Jedes Rechtsgeschäft, das lediglich die Verpflichtung zu einer Leistung Begründet und damit ein Schuldverhältnis zum Entstehen bringt. z.B \textbf{\href{https://www.gesetze-im-internet.de/bgb/__433.html}{§ 433}} Kaufvertrag}}
+	child[level distance=10cm, sibling angle=53, text width=63mm] { node {Verfügungsgeschäft jedes Rechtsgeschäft, das unmittelbar darauf gerichtet ist, die Rechtslage zu ändern (z.B. durch Veränderung, Übertragung, Belastung, Aufhebung eines Rechts) z.B \textbf{\href{https://www.gesetze-im-internet.de/bgb/__929.html}{§ 929 Übereignung}}}}
+	}
+child { node {Entstehung von Schuldverhältnissen}
+	child { node {\textbf{\href{https://www.gesetze-im-internet.de/bgb/__311.html}{§ 311 I}} Rechtsgeschäft}
+		child { node {Vertragsschluss}
+			child { node {Gegenseitige Verträge \\ (synallagmatisch) \\ \textbf{\href{https://www.gesetze-im-internet.de/bgb/__323.html}{§ 323}} \textbf{326}}}
+			child[level distance=8cm] { node {unvollkommen zweiseitige verpflichtende Verträge \\ \textbf{\href{https://www.gesetze-im-internet.de/bgb/__662.html}{§ 662}} Auftrag \\ \textbf{\href{https://www.gesetze-im-internet.de/bgb/__688.html}{§ 688}} Verwahrung \\ \textbf{\href{https://www.gesetze-im-internet.de/bgb/__598.html}{§ 598}} Leihe\\\textbf{\href{https://www.gesetze-im-internet.de/bgb/__516.html}{§ 516}} Schenkung}} 
+			child { node {Einseitig Verplichtender Vertrag z.B \textbf{\href{https://www.gesetze-im-internet.de/bgb/__518.html}{§ 518}} Schenknung oder \textbf{§765} Bürgschaft}}}
+		child[level distance=12cm] { node {Einseitige Rechstgeschäfte}
+			child { node {\textbf{\href{https://www.gesetze-im-internet.de/bgb/__657.html}{§ 657}}Auslobung}}
+			child { node {Vermächtnis}}
+			child { node {Annahme von lieferung unbestellter Waren}}
+			}
+			}
+		child[sibling angle=50] { node {Kraft Gesetzes}
+		[clockwise from=100]
+			child { node {\textbf{\href{https://www.gesetze-im-internet.de/bgb/__823.html}{§ 823}}   Unerlaubte Handlung}}
+			child { node {\textbf{\href{https://www.gesetze-im-internet.de/bgb/__812.html}{§ 812}} ungerechtfertige Bereicherung}}
+			child { node {\textbf{\href{https://www.gesetze-im-internet.de/bgb/__311.html}{§ 311 II}} \\Verschulden vor Vertragsschluss}
+			[clockwise from=30]
+				child { node {Vertragsverhandlungen}}
+				child { node {Anbahnung eines Vertrages}}
+				child { node {ähnliche Geschäftliche Kontakte}}
+			}
+			child { node {\textbf{\href{https://www.gesetze-im-internet.de/bgb/__677.html}{§ 677}} Geschäftsfürhung ohne Auftrag}}
+			}
+			}
+child[yshift=4cm, level distance=20.5cm] { node {Pflichten aus dem Schuldverhältnis}
+	[clockwise from=40]
+	child { node {Die Schuld muss bestimt oder Bestimmbar sein}}
+	child { node {\textbf{\href{https://www.gesetze-im-internet.de/bgb/__241.html}{§ 241 I}} Leistungspflicht}
+		child { node {Hauptleistungs\-pflichten}}
+		child { node {Nebenleistungs\-pflichten \\ Vertraglich vereinbart oder aus \textbf{\href{https://www.gesetze-im-internet.de/bgb/__242.html}{§ 242}} Treu und Glauben}}
+		}
+	child { node {\textbf{\href{https://www.gesetze-im-internet.de/bgb/__241.html}{§ 241 II}} Schutzpflicht}}
+	}
+child[xshift=-1cm,level distance=30cm] { node {\textbf{\href{https://www.gesetze-im-internet.de/bgb/__362.html}{§ 362}} Erlöschen durch Leistung}
+	[clockwise from=94]
+		child { node {Der Richtige \textbf{Schuldner} oder Dritter muss leisten, außer bei höchstpersönlicher Schuld}}
+		child { node {Der Richtige \textbf{Gläubiger} kann Wechseln (z.B) Erbfall}}
+		child { node {Die Richtige \textbf{Leistung} \\ \textbf{\href{https://www.gesetze-im-internet.de/bgb/__266.html}{§ 266}} der Schuldner ist nicht zu Teilleistungen berechtigt}
+		[clockwise from=50]
+			child { node {Stückschuld}}
+			child { node {\textbf{\href{https://www.gesetze-im-internet.de/bgb/__243.html}{§ 243}} Gattungsschuld}}
+			}
+		child[text width=50mm, sibling angle=45] { node {Der Richtige \textbf{Leistungsort} \\ \textbf{\href{https://www.gesetze-im-internet.de/bgb/__269.html}{§ 269}} \\ Bestimmt wo der Leistungs\textbf{erfolg} eintritt. \\ Leistungsort $\neq$ Erfolgsort}
+		[clockwise from=29]
+			child[text width=30mm] { node {Holschuld \\ \textbf{Regelfall}}}
+			child[text width=30mm] { node {Bringschuld}}
+			child[text width=30mm] { node {\textbf{\href{https://www.gesetze-im-internet.de/bgb/__447.html}{§ 447}} Schickschuld \\ Käufer trägt das Transportrisiko}
+			[clockwise from=0]
+				child { node {\textbf{\href{https://www.gesetze-im-internet.de/bgb/__270.html}{§ 270}} Qualifizierte Schickschuld \\ Der Schuldner Trägt das Transportrisiko (z.B. Geldschuld)}}}
+		}
+		child[sibling angle=45, level distance=6cm] { node {Die Richtige \textbf{Leistungszeit} \\ \textbf{\href{https://www.gesetze-im-internet.de/bgb/__271.html}{§ 271}} Die Leistung ist sofort fällig und darf sofort Bewirkt werden.}}
+}
+child { node {Erfüllungssurrogat}
+[clockwise from=43]
+	child { node {Leistung an Erfüllungs Statt}}
+	child { node {Hinterlegung}
+		child { node {\textbf{\href{https://www.gesetze-im-internet.de/bgb/__372.html}{§ 372}} Wenn der Gläubiger im Annahmeverzug ist und die Sache hinterlegungs\-fähig ist.}}
+		child { node {\textbf{\href{https://www.gesetze-im-internet.de/bgb/__376.html}{§ 376}} Rücknahme}}
+		child { node {\textbf{\href{https://www.gesetze-im-internet.de/bgb/__378.html}{§ 378}} Ausschluss der Rücknahme}}
+		}
+	child { node {Leistung erüllungshalber}}
+	child { node {\textbf{\href{https://www.gesetze-im-internet.de/bgb/__387.html}{§ 387}} Aufrechnung \\ Gegenseitigkeit \\ Gleichartigkeit \\ Fälligkeit \\ einredefreiheit}}
+}
+child[sibling angle=63] { node[text width=50mm] {Leistungs\-störungsrecht \\ \textbf{\href{https://www.gesetze-im-internet.de/bgb/__275.html}{§ 275}} Unmöglichkeit \\ Geld hat man zu haben! \\ \textbf{\href{https://www.gesetze-im-internet.de/bgb/__313.html}{§ 313}}}
+		child[sibling angle=50] { node {Folgen}
+			child { node {\textbf{\href{https://www.gesetze-im-internet.de/bgb/__326.html}{§ 326}} Befreiung von der Gegenleistung}}
+			child { node {Anspruch auf Schadensersatz statt der Leistung}
+				child { node {\textbf{\href{https://www.gesetze-im-internet.de/bgb/__311a.html}{§ 311a}} Leistungshindernis bei Vertragsschluss}}
+				child { node {\textbf{\href{https://www.gesetze-im-internet.de/bgb/__280.html}{§ 280}} Schadensersatz wegen Pflichverletzung\\ \textbf{\href{https://www.gesetze-im-internet.de/bgb/__283.html}{§ 283}} Schadensersatz statt der Leistung bei Ausschluss der Leistungspflicht}}
+				}
+			child { node {\textbf{\href{https://www.gesetze-im-internet.de/bgb/__326.html}{§ 326}} Rücktritt vom Vertrag}}
+			child { node {\textbf{\href{https://www.gesetze-im-internet.de/bgb/__285.html}{§ 285}} Herrausgabe des Ersatzes}}
+			}
+	child { node {Verzug}
+		child { node {Verzug des Schuldners}}
+		child { node {Verzug des Gläubigers}}
+	}
+	child { node {Schlechtleistung}}
+	child { node {Verletzung einer Schutzpflicht}}
+	}
+child[sibling angle=63] { node {\textbf{\href{https://www.gesetze-im-internet.de/bgb/__320.html}{§ 320}} Einrede \\ Die zu erbringede Leistung kann so lange verweigert werden, bis der andere Teil seine Gegenleistun erbracht hat.}
+	child { node {Vorraussetzungen}
+		child { node {\href{\yt}{Gegenseitiger Vertrag}}}
+		child { node {\href{\yt}{Gegensetigkeitsverhältnis (Synallagma)}}}
+		child { node {\href{\yt}{Fälligkeit der Gegenforderung}}}
+		child { node {\href{\yt}{Kein Ausschluss}}}
+		}
+		}
+		;
+\end{tikzpicture}
+
+
+
+\href{https://www.youtube.com/watch?v=fu3dRQlV6og}{\cofeAm{0.3}{0.9}{159}{15cm}{7cm}}
+
+\end{document}
+
