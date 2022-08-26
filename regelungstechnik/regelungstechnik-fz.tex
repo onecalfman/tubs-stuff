@@ -199,14 +199,14 @@ semilog label y/.style={above,font=\tiny} } % Magnitude Plot
 
 \begin{scope}[xscale=40/100, yscale=2/100] 
 	\UnitedB \semilog{-2}{3}{-30}{20} % xi=0.1 
-	\BodeGraph[blue!80,samples=500]{-1.5:1}{\DifAmp{1}} % D Glied
+	\BodeGraph[blue!80,samples=500]{-1.5:1}{\IntAmp{1}} % D Glied
 \end{scope} 
 
 \begin{scope}[yshift=-14mm, xshift=3cm,xscale=30/100,yscale=3/220] 
 	\UniteDegre 
 	\OrdBode{30} 
 	\semilog{-2}{3}{60}{120} % xi=0.1 
-	\BodeGraph[blue!80,samples=500]{-2:3}{\DifArg{1}} % D Glied
+	\BodeGraph[blue!80,samples=500]{-2:3}{\IntArg{1}} % D Glied
 \end{scope} 
 \end{tikzpicture}
 \\ \hline
