@@ -96,7 +96,7 @@ semilog label y/.style={above,font=\tiny}  % Magnitude Plot
 P &
           \begin{tikzpicture}[thick] \draw[<->] (0,1) |- (1.5,0); \draw[red!80] (0,0) |- (1.4,0.7); \end{tikzpicture} &
 		  \begin{tikzpicture}
-			  \node (a) {$\displaystyle y(t) = K  u(t), \quad A(i\omega) = K$};
+			  \node (a) {$\displaystyle y(t) = K  u(t), \quad A(\omega) = K$};
 			  \node [below=-1mm of a]  {$\displaystyle G=K, \quad \varphi(\omega) = 0$};
 		  \end{tikzpicture}
 			   &
@@ -135,8 +135,8 @@ semilog label y/.style={above,font=\tiny} } % Magnitude Plot
 I &
            \begin{tikzpicture}[thick] \draw[<->] (0,1) |- (1.5,0); \draw[red!80] (0,0) -- (1.4,0.7); \end{tikzpicture} &
 		   \begin{tikzpicture}
-			   \node (a) {$y(t) = K_I \int_{0}^{t} u(t)dt, \quad A(i\omega) = \frac{1}{T_N \omega}$};
-			   \node [below=-1mm of a] {$G=\frac{K_{I}}{s}, \quad \varphi(\omega)= -\frac{\pi}{2}$};
+			   \node (a) {$y(t) = \int_{0}^{t} u(t)dt, \quad A(\omega) = \frac{1}{T_I \omega}$};
+			   \node [below=-1mm of a] {$G=\frac{1}{T_I s}, \quad \varphi(\omega)= -\frac{\pi}{2}$};
 		   \end{tikzpicture}
 		   &
 				    \begin{tikzpicture}[thick]
@@ -161,6 +161,9 @@ semilog label y/.style={above,font=\tiny} } % Magnitude Plot
 \begin{scope}[xscale=40/100, yscale=2/100] 
 	\UnitedB \semilog{-2}{3}{-30}{20} % xi=0.1 
 	\BodeGraph[blue!80,samples=500]{-1:1.5}{\IntAmp{1}} % P Glied
+	\node[xshift=0mm, yshift=7mm] (a) {$1/T_I$};
+	\node[xshift=0mm, yshift=-1mm] (b) {};
+	\draw[very thick, red!80] (a) to (b);
 \end{scope} 
 
 \begin{scope}[yshift=11mm, xshift=3cm,xscale=30/100,yscale=3/220] 
@@ -174,8 +177,8 @@ semilog label y/.style={above,font=\tiny} } % Magnitude Plot
 D &
            \begin{tikzpicture}[thick] \draw[<->] (0,1) |- (1.5,0); \draw[red!80] (0,0.7) |- (1.4,0); \end{tikzpicture} &
 		   \begin{tikzpicture}
-			   \node (a) {$\displaystyle y(t) = K u'(t), \quad A(i\omega) = T_V \omega$};
-			   \node [below=-1mm of a] {$\displaystyle G=sT_v, \quad \varphi(\omega) = \frac{\pi}{2}$};
+			   \node (a) {$\displaystyle y(t) = u'(t), \quad A(\omega) = T_D \omega$};
+			   \node [below=-1mm of a] {$\displaystyle G=s T_D, \quad \varphi(\omega) = \frac{\pi}{2}$};
 		   \end{tikzpicture}
 		   &
 				    \begin{tikzpicture}[thick]
@@ -199,14 +202,17 @@ semilog label y/.style={above,font=\tiny} } % Magnitude Plot
 
 \begin{scope}[xscale=40/100, yscale=2/100] 
 	\UnitedB \semilog{-2}{3}{-30}{20} % xi=0.1 
-	\BodeGraph[blue!80,samples=500]{-1.5:1}{\IntAmp{1}} % D Glied
+	\BodeGraph[blue!80,samples=500]{-1.5:1}{-\IntAmp{1}} % D Glied
+	\node[xshift=0mm, yshift=7mm] (a) {$1/T_D$};
+	\node[xshift=0mm, yshift=-1mm] (b) {};
+	\draw[very thick, red!80] (a) to (b);
 \end{scope} 
 
 \begin{scope}[yshift=-14mm, xshift=3cm,xscale=30/100,yscale=3/220] 
 	\UniteDegre 
 	\OrdBode{30} 
 	\semilog{-2}{3}{60}{120} % xi=0.1 
-	\BodeGraph[blue!80,samples=500]{-2:3}{\IntArg{1}} % D Glied
+	\BodeGraph[blue!80,samples=500]{-2:3}{-\IntArg{1}} % D Glied
 \end{scope} 
 \end{tikzpicture}
 \\ \hline
@@ -217,8 +223,8 @@ PT$_1$ &
 	\draw[dashed] (0,0.7) -- (1.4,0.7);
 	\end{tikzpicture} &
 	      \begin{tikzpicture}
-		      \node (a) {$\displaystyle T y' + y = K u(t), \quad A(i\omega) = \frac{K}{\sqrt{1+(T_N \omega)}}$};
-			\node [below=-1mm of a] {$G=\frac{K_{P}}{1+Ts}, \quad \varphi(\omega) = -\arctan(\omega T)$};
+		      \node (a) {$\displaystyle T y' + y = u(t), \quad A(\omega) = \frac{1}{\sqrt{1+(T_1 \omega)}}$};
+			\node [below=-1mm of a] {$G=\frac{1}{1+T_1s}, \quad \varphi(\omega) = -\arctan(\omega T_1)$};
 	      \end{tikzpicture}
 	      &
 				    \begin{tikzpicture}[thick]
@@ -246,9 +252,9 @@ semilog label y/.style={above,font=\tiny} } % Magnitude Plot
 	\UnitedB \semilog{-2}{3}{-30}{20} % xi=0.1 
 	\BodeGraph[blue!80,dotted]{-2:2.5}{\POAmp{1}{0.1}} % PT1 Glied
 	\BodeGraph[blue!80, samples=500]{-2:2.5}{\POAmpAsymp{1}{0.1}} % PT1 Glied
-	\node[xshift=4mm, yshift=5.4mm] (a) {$1/T_1$};
+	\node[xshift=4mm, yshift=7mm] (a) {$1/T_1$};
 	\node[xshift=4mm, yshift=-1mm] (b) {};
-	\draw[thick, orange!80] (a) to (b);
+	\draw[very thick, red!80] (a) to (b);
 \end{scope} 
 
 \begin{scope}[yshift=4mm, xshift=3cm,xscale=30/100,yscale=3/220] 
@@ -263,9 +269,9 @@ semilog label y/.style={above,font=\tiny} } % Magnitude Plot
 PT$_2$ &
      \begin{tikzpicture}[thick] \draw[<->] (0,1) |- (1.5,0); \begin{axis}[scale=0.18,domain=0:5,samples=501,axis lines=none, xlabel={}, ylabel={}] \addplot[color=red!80,no marks,thick,smooth] {(1-exp(-x)*cos(10*deg(x)*0.5))}; \end{axis} \end{tikzpicture}  &
 	      \begin{tikzpicture}
-		      \node (a) { $\frac{y''}{\omega_{0}^{2}} \small{+}  \frac{2 Dy'}{\omega_{0}} \small{+} y = K u(t) $};
-			\node [below=-1mm of a] (b) {$G=K_{P}/(1+\frac{2 D}{\omega_{0}} s+\frac{1}{\omega_{0}^{2}} s^{2})$};
-			\node [below of=b] (c) {$A(i \omega) =\frac{K}{\sqrt{\left(1-\left(T_1\right)^{2}\right)^{2}+\left(2 \cdot D T_2\right)^{2}}}$};
+		      \node (a) { $\frac{y''}{\omega_{0}^{2}} \small{+}  \frac{2 Dy'}{\omega_{0}} \small{+} y = u(t) $};
+			\node [below=-1mm of a] (b) {$G=\frac{1}{1+\frac{2 D}{\omega_{0}} s+\frac{1}{\omega_{0}^{2}} s^{2}}$};
+			\node [below of=b] (c) {$A( \omega) =\frac{1}{\sqrt{\left(1-\left(T_1\right)^{2}\right)^{2}+\left(2 \cdot D T_2\right)^{2}}}$};
 			\node [below of=c] {$\varphi(\omega)=-\arctan \left(\frac{2 \cdot D \frac{\omega}{\omega_{0}}}{1-\left(\frac{\omega}{\omega_{0}}\right)^{2}}\right)$};
 
 	      \end{tikzpicture}
@@ -293,29 +299,27 @@ semilog label y/.style={above,font=\tiny} } % Magnitude Plot
 
 \begin{scope}[xscale=40/100, yscale=2/100] 
 	\UnitedB \semilog{-2}{3}{-30}{20} % xi=0.1 
-	\BodeGraph[violet]{-2:1.75}{\SOAmp{1}{1.5}{10}} % PT2 Glied
-	\BodeGraph[purple]{-2:1.75}{\SOAmp{1}{0.1}{10}} % PT2 Glied
-	\BodeGraph[blue]{-2:1.75}{\SOAmpAsymp{1}{1}{10}} % PT2 Glied
-	\node[xshift=4mm, yshift=5.4mm] (a) {$\omega_0$};
+	\BodeGraph[blue!80, dotted, samples=500]{-2:1.75}{\SOAmp{1}{0.1}{10}} % PT2 Glied
+	\BodeGraph[blue]{-2:1.75}{\SOAmpAsymp{1}{0.1}{10}} % PT2 Glied
+	\node[xshift=4mm, yshift=7mm] (a) {$\omega_0$};
 	\node[xshift=4mm, yshift=-1mm] (b) {};
-	\draw[very thick, green!80] (a) to (b);
+	\draw[very thick, red!80] (a) to (b);
 \end{scope} 
 
 \begin{scope}[yshift=4mm, xshift=3cm,xscale=30/100,yscale=3/440] 
 	\UniteDegre 
 	\OrdBode{30} 
 	\semilog{-2}{3}{-180}{0} % xi=0.1 
-	\BodeGraph[violet]{-2:3}{\SOArg{1}{1.5}{10}} % PT2 Glied
-	\BodeGraph[purple]{-2:3}{\SOArg{1}{0.1}{10}} % PT2 Glied
-	\BodeGraph[blue]{-2:3}{\SOArgAsymp{1}{1}{10}} % PT2 Glied
+	\BodeGraph[blue!80, dotted, samples=500]{-2:3}{\SOArg{10}{0.1}{10}} % PT2 Glied
+	\BodeGraph[blue!80,samples=500]{-2:3}{\SOArgAsymp{10}{0.1}{10}} % PT2 Glied
 \end{scope} 
 \end{tikzpicture}
 \\ \hline
 PT$_t$ &
        \begin{tikzpicture}[thick] \draw[<->] (0,1) |- (1.5,0); \draw[red!80] (0,0) -| (0.7,0.7); \draw[red!80] (0.7,0.7) -- (1.4,0.7); \end{tikzpicture}                                                                  &
 	      \begin{tikzpicture}
-		      \node (a) {$y(t) = Ku(t-T_t), \quad A(i\omega)=K $};
-			\node [below=-1mm of a] {$G=Ke^{-sT_t}, \quad \varphi(\omega)=-\omega \cdot T_{t} $};
+		      \node (a) {$y(t) = u(t-T_t), \quad A(\omega)=1 $};
+			\node [below=-1mm of a] {$G=e^{-sT_t}, \quad \varphi(\omega)=-\omega \cdot T_{t} $};
 	      \end{tikzpicture}
 	      &
 				    \begin{tikzpicture}[thick]
@@ -328,13 +332,34 @@ PT$_t$ &
 					    \draw[->] (-0.7,0) -- (0.7,0) node[below] {$\Re$};
 					    \draw[very thick, blue] (0,0) circle (0.5);
 				    \end{tikzpicture}
+        				    &
+        \begin{tikzpicture}[ gnuplot def/.append style={prefix={}}, ] % Grid Style
+        \tikzset{ semilog lines/.style={black},
+        semilog lines 2/.style={gray,dotted},
+        semilog half lines/.style={gray, dotted},
+        semilog label x/.style={below,font=\tiny},
+        semilog label y/.style={above,font=\tiny} } % Magnitude Plot 
+        
+        \begin{scope}[xscale=40/100, yscale=2/100] 
+        	\UnitedB \semilog{-2}{3}{-30}{20} % xi=0.1 
+        	\BodeGraph[blue!80, samples=500]{-2:3}{\RetAmp{10}} % PT1 Glied
+        \end{scope} 
+        
+        \begin{scope}[yshift=4mm, xshift=3cm,xscale=30/100,yscale=3/220] 
+        	\UniteDegre 
+        	\OrdBode{30} 
+        	\semilog{-2}{3}{-90}{0} % xi=0.1 
+        	\BodeGraph[blue!80,samples=500]{-2:3}{\RetArg{.08}} % P Glied
+        \end{scope} 
+        \end{tikzpicture}
 	\\ \hline
+	
 PID  &
       \begin{tikzpicture}[thick] \draw[<->] (0,1) |- (1.5,0); \draw[red!80] (0,0) -- (0,0.8); \draw[red!80] (0,0.3) -- (1.4,0.7); \end{tikzpicture} &
 	      \begin{tikzpicture}
-		      \node (a) {\small $y = K \left(u(t) + T_V u'(t) + \frac{1}{T_N}\int_{0}^{t} u(t)dt\right)$};
-			\node [below=-1mm of a] (b) {$G=K_{P}\left[1+\frac{1}{T_{N} s}+T_{V} s\right]u(t)\; dt$};
-			\node [below of=b] (c) {$A(i\omega) =\frac{K_{R}}{\omega  T_{N}} \sqrt{\left(1+\left(\omega \cdot T_{N}\right)^{2}\left(1+\left(\omega \cdot T_{V}\right)^{2}\right)\right)}$};
+		      \node (a) {\small $y =  u(t) + T_V u'(t) + \frac{1}{T_N}\int_{0}^{t} u(t)dt$};
+			\node [below=-1mm of a] (b) {$G=\left(1+\frac{1}{T_{N} s}+T_{V} s\right)u(t)\; dt$};
+			\node [below of=b] (c) {$A(\omega) =\frac{1}{\omega  T_{N}} \sqrt{\left(1+\left(\omega \cdot T_{N}\right)^{2}\left(1+\left(\omega \cdot T_{V}\right)^{2}\right)\right)}$};
 			\node [below of=c] {$\varphi(\omega)=-\arctan \left(\frac{1-\omega^{2} \cdot T_{N} \cdot T_{V}}{\omega\left(T_{N}+T_{V}\right)}\right)$};
 
 	      \end{tikzpicture}
@@ -353,6 +378,34 @@ PID  &
 					    \draw[very thick, blue] (0,-0.7) -- (0,0.7);
 				    \end{tikzpicture}
 				    &
+				            \begin{tikzpicture}[ gnuplot def/.append style={prefix={}}, ] % Grid Style
+        \tikzset{ semilog lines/.style={black},
+        semilog lines 2/.style={gray,dotted},
+        semilog half lines/.style={gray, dotted},
+        semilog label x/.style={below,font=\tiny},
+        semilog label y/.style={above,font=\tiny} } % Magnitude Plot 
+        
+        \begin{scope}[xscale=40/100, yscale=2/100] 
+        	\UnitedB \semilog{-1}{4}{-10}{40} % xi=0.1 
+        	\BodeGraph[blue!80, samples=500]{-1:4}{\PIDAmpAsymp{1}{1}{0.001}} % PT1 Glied
+        	\BodeGraph[blue!80, dotted, samples=500]{-1:4}{\PIDAmp{1}{1}{0.001}} % PT1 Glied
+        	\node[xshift=0mm, yshift=11mm] (a) {$1/T_N$};
+	        \node[xshift=0mm, yshift=-1mm] (b) {};
+	        \draw[very thick, red!80] (a) to (b);
+	        \node[xshift=12mm, yshift=11mm] (c) {$1/T_V$};
+	        \node[xshift=12mm, yshift=-1mm] (d) {};
+	        \draw[very thick, red!80] (c) to (d);
+        \end{scope} 
+        
+        \begin{scope}[yshift=4mm, xshift=3.4cm,xscale=30/100,yscale=3/440] 
+        	\UniteDegre 
+        	\OrdBode{30} 
+        	\semilog{-2}{3}{-90}{90} % xi=0.1 
+        	\BodeGraph[blue!80,samples=500]{-2:3}{\PIDArgAsymp{1}{1}{0.001}} % P Glied
+        	\BodeGraph[blue!80, dotted, samples=500]{-2:3}{\PIDArg{1}{1}{0.001}} % P Glied
+        \end{scope} 
+        \end{tikzpicture}
+				    
 %\begin{tikzpicture}[auto, node distance=2cm,>=latex', node distance=1.9cm]
 %	\node [input, name=in] (in) {};
 %	\node [sum, right of=in] (s1) {};
@@ -412,10 +465,12 @@ PID  &
 	\begin{align*}
 		G(s) & =G(i\omega) = |G(i\omega)| \cdot e^{i\varphi(i\omega)} \\
 		%G(s) & =G(i\omega) = |G(i\omega)| \cdot e^{i\arctan\frac{\Im}{\Re}} \\
-		|G(i\omega)| &= \sqrt{\Re^2 + \Im^2} = A(i\omega)\\
+		|G(i\omega)| &= \sqrt{\Re^2 + \Im^2} = A(\omega)\\
 		|G(i\omega_d)| &=1 \leftarrow \text{Durchtrittsfrequenz} \\
+		A_{dB}(\omega) &= 20\log_{10} A(\omega)\\
+		\varphi(\omega) &= \arctan{\frac{\Im}{\Re}}\\
 		%\varphi(i\omega) &= \arctan \left(\frac{\Im}{\Re}\right) \\
-		%G(i\omega) &= A(i\omega) \cdot e^{-i \varphi(i\omega)} \\
+		%G(i\omega) &= A(\omega) \cdot e^{-i \varphi(i\omega)} \\
 		A_R &= \frac{1}{|G_0(i\omega_\pi)|} \\
 		\varphi_0(i\omega_d) &= \alpha_R - \pi \\
 		\varphi_0(\omega_\pi) &= -\pi \\
@@ -447,13 +502,14 @@ PID  &
 \subsection*{Stabilitätsuntersuchung}
 
 \subsubsection*{Pole und Nullstellen}
-Gleichung auf Form bringen:
 	\begin{align*}
-		1. &\quad  G(s) = k \frac{s-s_0}{(s-s_1)(s-s_2)} \\
-		2. &\quad \text{Pole und Nullstellen berechnen} \\
-		   &\quad \text{falls Parameter vorhanden} \\
-		3. &\quad s^2 + \mathbf{p}s + \mathbf{q} = 0 \\
-		4. &\quad \text{Parameter für: } \mathbf{p}>0, \mathbf{q}>0 \\
+		1. &\quad  \text{Polstelle } p_i: G(s) \rightarrow \infty \\
+		& \quad\text{pq-Formel: } s^2 + \mathbf{p}s + \mathbf{q} = 0 \\
+		&\quad p_i = s_{1/2} = -\frac{\mathbf{p}}{2} \pm \sqrt{\left(\frac{\mathbf{p}}{2}\right)^2-\mathbf{q}}\\
+		 &\quad \text{stabil: } \forall \Re(p_i) < 0 \text{ oder: } \mathbf{p}>0, \mathbf{q}>0   \\
+		 &\quad \text{instabil: } \Re(p_i) > 0 \\
+		 &\quad \text{grenzstabil: } \Re(p_i) = 0\\
+		2. &\quad \text{Nullstelle: } G(s) \rightarrow 0 \\
 	\end{align*}
 
 
@@ -477,8 +533,8 @@ Gleichung auf Form bringen:
 \end{alignat*}
 
 \paragraph{Vereinfachtes Nyquist \\ Kriterium} ist anwendbar, wenn die Übertragungsfunktion \\
-1. Integrierendes Verhalten aufweist \\
-2. Alle $p_i > 0$ sind,\\ falls alle $< 0$ sind mit $-1$ multiplizieren \\
+1. Integrierendes Verhalten aufweist ($\frac{1}{s}$ ausklammerbar) \\
+2. Alle $p_n > 0$ sind,\\ falls alle $< 0$ sind mit $-1$ multiplizieren \\
 $G_0(s) = G_S \cdot G_R \leftarrow \text{Offene Kette}$ \\
 Geschlossene Kette stabil, wenn kritische Punkt (-1,0) zur Linken der in Richtung zur Frequenz durchlaufenden Ortskurve des Frequenzgangs liegt.
 
@@ -486,7 +542,7 @@ Geschlossene Kette stabil, wenn kritische Punkt (-1,0) zur Linken der in Richtun
 	%n = m + p > 0 \\
 	m + p \overset{!}{=} 0 \\
 	p = &\text{Anzahl positiver Pole des} \\ & \text{Offenen Regelkreises} \\
-	m = &\text{Anzahl der Umläufe um -1} \\ &\text{im Uhrzeigersinn} \\
+	m = &\text{Anzahl der Umläufe um (-1,0)} \\ &\text{+ im Uhrzeigersinn } \\&\text{- gegen Uhrzeigersinn } \\
 	%n = &\text{Anzahl positiver Pole des} \\ &\text{Geschlossenen Regelkreises} \\
 \end{align*}
 
@@ -516,11 +572,10 @@ Führungsverhalten $\sim$ \\ $ 4<A_{R}<10$ und $40^{\circ}<\alpha_{R}<60^{\circ}
 
 \paragraph{Trigonometrie}
 \begin{align*}
-	\sin(0) &= 0 \\
-	\cos(0) &= 1 \\
+	\sin^2 + \cos^2 &= 1 \\
 	\arctan(0) &= 0 \\
 	\arctan(\infty) &= \frac{\pi}{2} \\
-	\arctan(-\infty) &= \frac{-\pi}{2}
+	\arctan(-\infty) &= -\frac{\pi}{2}
 \end{align*}
 
 %\begin{align*}
@@ -564,10 +619,15 @@ Führungsverhalten $\sim$ \\ $ 4<A_{R}<10$ und $40^{\circ}<\alpha_{R}<60^{\circ}
 
 \paragraph{Regelverstärkung/Abweichung}
 	\begin{align*}
-		\lim _{t \rightarrow \infty} y(t) & =\lim _{s \rightarrow 0}(s \cdot Y(s))=\lim _{s \rightarrow 0}\left(s \cdot Z(s) \cdot F_{Z}\right) = \text{Regelabweichung}\\
-		\lim_{s\rightarrow0} & \left(s\cdot\frac{1}{s} G_W(s)\right) = 1 - \text{Verstärkung/Abweichung} \\
+		\lim _{t \rightarrow \infty} y(t) &=\lim _{s \rightarrow 0}(s \cdot Y(s)) \leftarrow \text{Grenzwertsatz}\\
+		\lim_{s\rightarrow0} \left(s\cdot\frac{1}{s} G_W(s)\right) &= 1 - \text{Verstärkung/Abweichung} \\
 		Z(s) &=\frac{1}{s} \lim _{s \rightarrow 0} \left(s \cdot \frac{1}{s} \cdot G_{z}(s)\right) = 1 -( 1- \text{Abweichung} ) \\
-		W(s) &= \frac{1}{s} \text{ Einheitssprung} \\
+		Z(s) \text{ bzw. } W(s) &=
+    \begin{cases}
+      F_{ext} \leftarrow \text{Impuls}\\
+      \frac{1}{s}F_{ext}\leftarrow \text{Einheitssprung}\\
+      \frac{1}{s^2}F_{ext}\leftarrow \text{Rampe}\\
+    \end{cases} 
 	\end{align*}
 
 
@@ -690,7 +750,7 @@ $\Lambda=\frac{1}{G_{11} G_{22}-G_{12} G_{21}}\left(\begin{array}{cc}G_{11} G_{2
 \\
 \textbf{Ausgangsgrößen} Wirkung des Prozesses auf die  Umgebung 
 \\
-\textbf{Regelgroßen} sind geregelte Ausgange 
+\textbf{Regelgrößen} sind geregelte Ausgange 
 \\
 \textbf{gemessene Ausgänge} = primäre Messgrößen 
 \\
@@ -718,7 +778,7 @@ $\Lambda=\frac{1}{G_{11} G_{22}-G_{12} G_{21}}\left(\begin{array}{cc}G_{11} G_{2
 \begin{equation*}
 \varphi \cdot (\alpha + \beta) = \varphi \cdot \alpha + \varphi \cdot \beta
 \end{equation*}
-\textbf{nichtlineartät} eg. Druck am Boden eine Wasserbehälters
+\textbf{nichtlinearität} z.B. Druck am Boden eine Wasserbehälters
 \\
 \textbf{Blockschaltbilder Zweck} 
 	\begin{enumerate}[leftmargin=4mm]
@@ -761,14 +821,14 @@ $\Lambda=\frac{1}{G_{11} G_{22}-G_{12} G_{21}}\left(\begin{array}{cc}G_{11} G_{2
 \\
 \textbf{Ortskurve} Darstellung von Phase und Frequenz als Verlauf des Vektors $\left(\begin{array}{c} \Re(G(i\omega) \\ \Im(G(i\omega) \end{array}\right)$ bestimmbar durch Anregung und Messung von verschiedenen Frequenzen.
 \\
-\textbf{Amplituden-/phasenreserve} gibt mögliche Amplituden-/phasenerhöhung bis zur Instabilität an.
+\textbf{Amplituden-/Phasenreserve} gibt mögliche Amplituden-/phasenerhöhung bis zur Instabilität an.
 \\
-\textbf{Übertragungsstabil} beschränktes Eingangssignal $\rightarrow$ beschränktes Ausgangssignal
-\begin{figure}[H]
+\textbf{Übertragungs-/BIBO-stabil} beschränktes Eingangssignal $\rightarrow$ beschränktes Ausgangssignal
+\\
 \textbf{Kaskadenregelung} Hauptregler legt Sollwert eines Hilfsreglers fest \\
 Untergeordneter Hilfsregler verbirgt Störungen in dem Prozessteil, den er regelt, vor dem übergeordneten Regler \\
 	\textit{Zweck}: oft zur Beschleunigung von Regelvorgängen
-
+\begin{figure}[H]
 \begin{tikzpicture}[every node/.style={scale=0.38}, auto, node distance=1.5cm,>=latex', node distance=2cm]
 	\node [input, name=in] (in) {};
 	\node [sum, right of=in] (s1) {};
@@ -793,7 +853,7 @@ Untergeordneter Hilfsregler verbirgt Störungen in dem Prozessteil, den er regel
 	\draw [->] (g4) --  (o2);
 \end{tikzpicture}
 \end{figure}
-\textbf{Vorregelung} Regle wichtige Größe, bevor sie das eigentliche zu regelnde System erreicht, zur minder von Störungen. duh
+\textbf{Vorregelung} Regelt wichtige Größe, bevor sie das eigentliche zu regelnde System erreicht, zur Minderung von Störungen. duh
 \textit{Beispiel:} isothermer Reaktor zu Bakteriellen Abwasserreinigung
 \\
 \textbf{Störgrößenaufschaltung} Messen von Störgrößen bevor sie bei der Hauptregelung ankommen, benötigt hilfsregler und messbare Störgröße. Ermöglicht schnelleres eingreifen.
@@ -807,7 +867,7 @@ Untergeordneter Hilfsregler verbirgt Störungen in dem Prozessteil, den er regel
 \textbf{Advanced Process Control (APC)} 
 In technischer Anwendung müssen ‚ Prozessregler während des Betriebs zur Verbesserung der Regelgüte angepasst werden (Control Performance Management) \\
 \textit{Massnahmen:} Integration von Überwachungsbausteinen in die jeweiligen Regelkreise (z.B. ConPerMon von Siemens), Automatische Protokollierung von Regelgüte und auftretenden Fehlern Verbess bedarf \\
-Hintergrund: Durch große Anzahl an (PID-) Reglern innerhalb eines großtechnischen Prozesses ist eine manuelle Überwachung der Regelkreise und Veränderung der Parameter während des Betriebs oft nicht möglich. $\rightarrow$ \texttt{Process-Controll-Management}
+Hintergrund: Durch große Anzahl an (PID-) Reglern innerhalb eines großtechnischen Prozesses ist eine manuelle Überwachung der Regelkreise und Veränderung der Parameter während des Betriebs oft nicht möglich. $\rightarrow$ \textbf{Process-Controll-Management}
 \\
 \textbf{Loopshaping} Optimierung der offenen Kette meist durch "Spaping" von Frequenzgang/Ortskurve.
 \\
@@ -825,7 +885,7 @@ Die Ortskurve muss den Punkt -1 für den Durchlauf der Frequenzen von $-\infty \
 \\
 \textbf{Totzeitglied} Zeitliche Verzögerung ohne verstärkung z.B Rohr, Mechanische Laufzeiten
 \\
-\textbf{Systemidentifikation Bild- vs Zeitbereich} Zeitbereich ist einfacher aber Bildbereich ist genauer.
+\textbf{Systemidentifikation Bild- vs. Zeitbereich} Zeitbereich ist einfacher aber Bildbereich ist genauer.
 \\
 \textbf{Festwertregelung} w = const.
 \\
@@ -850,7 +910,7 @@ Die Ortskurve muss den Punkt -1 für den Durchlauf der Frequenzen von $-\infty \
 \end{figure}
 
 \textbf{Fließbilder}
-\begin{itemize}
+\begin{itemize}\itemsep0pt
 	\item[TC] = Temperaturregler
 	\item[FC] = Durchflussregler
 	\item[CC] = Konzentrationsregler
@@ -859,9 +919,9 @@ Die Ortskurve muss den Punkt -1 für den Durchlauf der Frequenzen von $-\infty \
 \end{itemize}
 
 \textbf{KI}  Mustererkennung, Analyse, Kommunikation \\
-\textbf{Fuzzy}-Control  Fuzzifizierung (Bewertungsfunktiontn), Auswertung von Expertenregeln, Defuzzifizieren \\
+\textbf{Fuzzy-Control}  Fuzzifizierung (Bewertungsfunktiontn), Auswertung von Expertenregeln, Defuzzifizieren \\
 \textbf{Neural-Network}  Menschliches Denken nachbilden \\
-\textbf{Neuron}  Empfang und Ausgang von Signalen, nimmt gewichtung vor \\
+\textbf{Neuron}  Empfang und Ausgang von Signalen, nimmt Gewichtung vor \\
 
 
 
